@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin", "Plugin\Plugin.csproj", "{C194C450-5D57-4E2A-86DE-D98CB4B70C79}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "H3QOL", "H3QOL\H3QOL.csproj", "{C194C450-5D57-4E2A-86DE-D98CB4B70C79}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
