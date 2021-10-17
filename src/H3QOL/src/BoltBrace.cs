@@ -10,20 +10,23 @@ namespace Plugin
 		[HarmonyPrefix]
 		public static bool BoltBracePatch(ClosedBoltWeapon __instance)
 		{
-			if (__instance.transform.parent != GM.Instance.m_currentPlayerBody.Head.transform)
+			if (__instance.transform.parent != BoltBrace_PlayerHeadLock.Instance.transform)
 			{
-				if (!__instance.IsHeld && !__instance.IsAltHeld && __instance.Bolt.CurPos == ClosedBolt.BoltPos.Rear)
+				//is not braced- braced
+				if (!__instance.IsHeld && !__instance.IsAltHeld && __instance.Bolt.CurPos == ClosedBolt.BoltPos.Rear && __instance.Bolt.IsHeld)
 				{
 					__instance.SetIsKinematicLocked(true);
-					__instance.transform.parent = GM.Instance.m_currentPlayerBody.Head.transform;
+					__instance.transform.parent = BoltBrace_PlayerHeadLock.Instance.transform;
+					__instance.gameObject.AddComponent(typeof(BoltBrace_UnKinematicLock));
 				}
 			}
 			else
 			{
-				if (__instance.IsHeld || __instance.IsAltHeld || __instance.Bolt.CurPos != ClosedBolt.BoltPos.Rear)
+				//is braced- unbrace
+				if (__instance.IsHeld || __instance.IsAltHeld || __instance.Bolt.CurPos != ClosedBolt.BoltPos.Rear || !__instance.Bolt.IsHeld)
 				{
-					__instance.SetIsKinematicLocked(false);
 					__instance.transform.parent = null;
+					__instance.SetIsKinematicLocked(false);
 				}
 			}
 			return true;

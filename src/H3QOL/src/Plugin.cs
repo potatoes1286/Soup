@@ -15,6 +15,8 @@ namespace H3VRMod
 			Harmony.CreateAndPatchAll(typeof(DecockingRevolver));
 			Harmony.CreateAndPatchAll(typeof(LaserPointerPatch));
 			Harmony.CreateAndPatchAll(typeof(BoltBrace));
+			Harmony.CreateAndPatchAll(typeof(BoltBrace_PlayerHeadLock));
+			Harmony.CreateAndPatchAll(typeof(ThumbBullet));
 		}
 	}
 }
