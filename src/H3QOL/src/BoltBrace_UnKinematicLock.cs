@@ -6,18 +6,22 @@ namespace Plugin
 {
 	public class BoltBrace_UnKinematicLock : MonoBehaviour
 	{
-		private ClosedBoltWeapon cb;
+		private FVRPhysicalObject physobj;
+		private FVRInteractiveObject bolt;
 
 		public void Start()
 		{
-			cb = GetComponent<ClosedBoltWeapon>();
+			physobj = GetComponent<FVRPhysicalObject>();
+
+			if (physobj is ClosedBoltWeapon) bolt = (physobj as ClosedBoltWeapon).Bolt;
+			if (physobj is BoltActionRifle) bolt = (physobj as BoltActionRifle).BoltHandle;
 		}
 
 		public void Update()
 		{
-			if (!cb.IsHeld && !cb.IsAltHeld && !cb.Bolt.IsHeld)
+			if (!physobj.IsHeld && !physobj.IsAltHeld && !bolt.IsHeld)
 			{
-				cb.SetIsKinematicLocked(false);
+				physobj.SetIsKinematicLocked(false);
 				Destroy(this);
 			}
 		}

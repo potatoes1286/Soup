@@ -6,7 +6,7 @@ using FistVR;
 using HarmonyLib;
 using UnityEngine;
 
-namespace H3VRMod
+namespace Plugin
 {
 	public class DecockingRevolver : MonoBehaviour
 	{
