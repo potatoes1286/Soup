@@ -12,8 +12,11 @@ namespace Plugin
 	public class BepInExPlugin : BaseUnityPlugin
 	{
 		public static ConfigEntry<bool> EnableClearStabilization;
+		public static ConfigEntry<bool> EnableAccurateQBslots;
 		public void Start()
 		{
+			EnableClearStabilization = Config.Bind("General Settings", "Clear Stabilization", true, "Hides your offhand if you're stabilizing a gun with it.");
+			EnableAccurateQBslots = Config.Bind("General Settings", "Accurate QB Slots", true, "Removes QB slot delay. Can / does cause slowdown.");
 			Harmony.CreateAndPatchAll(typeof(DecockingRevolver));
 			Harmony.CreateAndPatchAll(typeof(LaserPointerPatch));
 			Harmony.CreateAndPatchAll(typeof(BoltBrace));
@@ -22,7 +25,6 @@ namespace Plugin
 			Harmony.CreateAndPatchAll(typeof(BetterQBslots));
 			Harmony.CreateAndPatchAll(typeof(BoltActionRifleDecocking));
 			Harmony.CreateAndPatchAll(typeof(ClearStabilization));
-			EnableClearStabilization = Config.Bind("General Settings", "Clear Stabilization", true, "Hides your offhand if you're stabilizing a gun with it.");
 		}
 	}
 }
