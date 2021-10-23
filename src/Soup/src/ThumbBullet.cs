@@ -1,6 +1,7 @@
 ﻿using FistVR;
 using HarmonyLib;
 using UnityEngine;
+using Debug = System.Diagnostics.Debug;
 using ItemSpawnerUI = On.FistVR.ItemSpawnerUI;
 
 namespace Plugin
@@ -9,30 +10,31 @@ namespace Plugin
 	{
 		[HarmonyPatch(typeof(FVRFireArmChamber), "EjectRound")]
 		[HarmonyPostfix]
-		public static void ThumbBullet_BAR_Patch(FVRFireArmChamber __instance, ref FVRFireArmRound __result)
+		public static void ThumbBullet_Chamber_Patch(FVRFireArmChamber __instance, ref FVRFireArmRound __result)
 		{
-			bool canThumb = (__instance.Firearm is BoltActionRifle || __instance.Firearm is ClosedBoltWeapon);
+			bool canThumb =
+				   __instance.Firearm is BoltActionRifle
+				|| __instance.Firearm is ClosedBoltWeapon 
+				|| __instance.Firearm is Handgun;
 
 			if (canThumb)
 			{
 				FVRInteractiveObject io = null;
 
-				if (__instance.Firearm is BoltActionRifle) io = (__instance.Firearm as BoltActionRifle).BoltHandle;
-				if(__instance.Firearm is ClosedBoltWeapon) io =(__instance.Firearm as ClosedBoltWeapon).Bolt;
-				
+				if (__instance.Firearm is BoltActionRifle)  io =  (__instance.Firearm as BoltActionRifle).BoltHandle;
+				if (__instance.Firearm is ClosedBoltWeapon) io = (__instance.Firearm as ClosedBoltWeapon).Bolt;
+				if (__instance.Firearm is Handgun)			io =		  (__instance.Firearm as Handgun).Slide;
+
 				if (io.IsHeld)
 				{
-					if (io.m_hand.Input.TouchpadPressed)
+					if (__instance.Firearm.Magazine != null && __result != null  && io.m_hand.Input.TouchpadPressed)
 					{
-						if (__instance.Firearm.Magazine != null)
+						if (!__result.IsSpent)
 						{
-							if (__result != null)
+							if (__instance.Firearm.Magazine.m_numRounds < __instance.Firearm.Magazine.m_capacity)
 							{
-								if (!__result.IsSpent)
-								{
-									__instance.Firearm.Magazine.AddRound(__result, true, true);
-									Destroy(__result.gameObject);
-								}
+								__instance.Firearm.Magazine.AddRound(__result, true, true);
+								Destroy(__result.gameObject);
 							}
 						}
 					}
