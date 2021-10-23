@@ -15,9 +15,20 @@ namespace Plugin
 			if(BepInExPlugin.EnableAccurateQBslots.Value) return false;
 			if (__instance.CurObject != null)
 			{
-				if (__instance.CurObject.IsHeld || __instance.CurObject.IsKinematicLocked)
+				if (__instance.CurObject.IsHeld)
 				{
 					return false;
+				}
+				else
+				{
+					FVRInteractiveObject io = null;
+					if (__instance.CurObject is BoltActionRifle)  io =  (__instance.CurObject as BoltActionRifle).BoltHandle;
+					if (__instance.CurObject is ClosedBoltWeapon) io = (__instance.CurObject as ClosedBoltWeapon).Bolt;
+					if (__instance.CurObject is Handgun)		  io =          (__instance.CurObject as Handgun).Slide;
+					if (io != null)
+					{
+						if (io.IsHeld) return false;
+					}
 				}
 				__instance.CurObject.transform.position = __instance.CurObject.transform.position + dir;
 				__instance.CurObject.RootRigidbody.velocity = Vector3.zero;
