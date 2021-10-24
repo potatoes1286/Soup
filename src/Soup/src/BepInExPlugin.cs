@@ -25,6 +25,7 @@ namespace Plugin
 			Harmony.CreateAndPatchAll(typeof(BetterQBslots));
 			Harmony.CreateAndPatchAll(typeof(BoltActionRifleDecocking));
 			Harmony.CreateAndPatchAll(typeof(ClearStabilization));
+			Harmony.CreateAndPatchAll(typeof(BetterPanels));
 		}
 	}
 }
