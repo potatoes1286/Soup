@@ -1,4 +1,5 @@
-﻿using FistVR;
+﻿using System;
+using FistVR;
 using HarmonyLib;
 using UnityEngine;
 
@@ -12,7 +13,7 @@ namespace Plugin
 		[HarmonyPrefix]
 		public static bool QBRemoveCode_Patch(FVRQuickBeltSlot __instance, ref Vector3 dir)
 		{
-			if(BepInExPlugin.EnableAccurateQBslots.Value) return false;
+			if(BepInExPlugin.EnableAccurateQBslots.Value && __instance.CurObject.DoesQuickbeltSlotFollowHead) return false;
 			if (__instance.CurObject != null)
 			{
 				if (__instance.CurObject.IsHeld)
@@ -21,14 +22,9 @@ namespace Plugin
 				}
 				else
 				{
-					FVRInteractiveObject io = null;
-					if (__instance.CurObject is BoltActionRifle)  io =  (__instance.CurObject as BoltActionRifle).BoltHandle;
-					if (__instance.CurObject is ClosedBoltWeapon) io = (__instance.CurObject as ClosedBoltWeapon).Bolt;
-					if (__instance.CurObject is Handgun)		  io =          (__instance.CurObject as Handgun).Slide;
-					if (io != null)
-					{
-						if (io.IsHeld) return false;
-					}
+					//this checks if the curobj is considered bolt braced
+					if (__instance.CurObject.transform.parent == BoltBrace_PlayerHeadLock.Instance.transform)
+						return false;
 				}
 				__instance.CurObject.transform.position = __instance.CurObject.transform.position + dir;
 				__instance.CurObject.RootRigidbody.velocity = Vector3.zero;
@@ -40,23 +36,71 @@ namespace Plugin
 		[HarmonyPrefix]
 		public static bool QBfuPatch(FVRQuickBeltSlot __instance)
 		{
-			if(BepInExPlugin.EnableAccurateQBslots.Value) return false;
+			if(BepInExPlugin.EnableAccurateQBslots.Value && __instance.CurObject.DoesQuickbeltSlotFollowHead) return false;
 			return true;
 		}
+
+		/*[HarmonyPatch(typeof(FVRPhysicalObject), "SetQuickBeltSlot")]
+		[HarmonyPostfix]
+		public static void QBChildSelf_Patch(FVRPhysicalObject __instance)
+		{
+			if (BepInExPlugin.EnableAccurateQBslots.Value)
+			{
+				if (__instance.m_quickbeltSlot != null)
+				{
+					__instance.transform.SetParent(__instance.m_quickbeltSlot.PoseOverride);
+				}
+			}
+		}
 		
+		[HarmonyPatch(typeof(FVRPhysicalObject), "SetQuickBeltSlot")]
+		[HarmonyPrefix]
+		public static bool QBChildSelfPrefix_Patch(FVRPhysicalObject __instance, ref FVRQuickBeltSlot slot)
+		{
+			if (BepInExPlugin.EnableAccurateQBslots.Value)
+			{
+				if (__instance.m_quickbeltSlot != null && slot == null) __instance.transform.SetParent(null);
+			}
+			return true;
+		}*/
+		
+		/*[HarmonyPatch(typeof(FVRPhysicalObject), "SetQuickBeltSlot")]
+		[HarmonyPostfix]
+		public static void QBUnChildSelf_Patch(FVRPhysicalObject __instance)
+		{
+			Debug.Log("2");
+			if (BepInExPlugin.EnableAccurateQBslots.Value)
+				if (__instance.m_quickbeltSlot != null) __instance.SetParentage(__instance.m_quickbeltSlot.PoseOverride);
+		}*/
+		
+		/*[HarmonyPatch(typeof(FVRQuickBeltSlot), "Awake")]
+		[HarmonyPostfix]
+		public static void QBMoveWithHead_Patch(FVRQuickBeltSlot __instance)
+		{
+			if (BepInExPlugin.EnableAccurateQBslots.Value)
+			{
+				if (__instance.IsPlayer &&
+				    __instance.m_isKeepingTrackWithHead &&
+				    __instance.Shape == FVRQuickBeltSlot.QuickbeltSlotShape.Sphere)
+				{
+					__instance.transform.parent = GM.CurrentPlayerBody.Head;
+				}
+			}
+		}*/
+
 		[HarmonyPatch(typeof(FVRQuickBeltSlot), "Update")]
 		[HarmonyPostfix]
 		public static void QBMoveContentsPatch(FVRQuickBeltSlot __instance)
 		{
-			if (BepInExPlugin.EnableAccurateQBslots.Value)
+			if (BepInExPlugin.EnableAccurateQBslots.Value && __instance.CurObject.DoesQuickbeltSlotFollowHead)
 			{
 				if (__instance.CurObject != null)
 				{
-					if (__instance.CurObject.IsHeld || __instance.CurObject.IsKinematicLocked)
+					if (__instance.CurObject.IsHeld)
 					{
 						return;
 					}
-
+					
 					__instance.CurObject.transform.position = __instance.PoseOverride.transform.position;
 
 					if (__instance.IsPlayer &&
