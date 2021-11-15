@@ -2,7 +2,6 @@
 using HarmonyLib;
 using UnityEngine;
 using Debug = System.Diagnostics.Debug;
-using ItemSpawnerUI = On.FistVR.ItemSpawnerUI;
 
 namespace Plugin
 {
