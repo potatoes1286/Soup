@@ -10,7 +10,8 @@ namespace Plugin
 		[HarmonyPrefix]
 		public static bool ClearStabilization_Patch(FVRFireArm __instance)
 		{
-			if (!BepInExPlugin.EnableClearStabilization.Value)
+			if (!BepInExPlugin.EnableClearStabilization.Value ||
+			    !GM.Options.QuickbeltOptions.HideControllerGeoWhenObjectHeld)
 			{
 				return true;
 			}
