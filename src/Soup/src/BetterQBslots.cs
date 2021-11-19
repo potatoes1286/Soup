@@ -1,5 +1,4 @@
-﻿using System;
-using FistVR;
+﻿using FistVR;
 using HarmonyLib;
 using UnityEngine;
 
@@ -13,7 +12,7 @@ namespace PotatoesSoup
 		[HarmonyPrefix]
 		public static bool QBRemoveCode_Patch(FVRQuickBeltSlot __instance, ref Vector3 dir)
 		{
-			if(BepInExPlugin.EnableAccurateQBslots.Value && __instance.CurObject.DoesQuickbeltSlotFollowHead) return false;
+			if(BepInExPlugin.EnableAccurateQBslots.Value && __instance.m_isKeepingTrackWithHead) return false;
 			if (__instance.CurObject != null)
 			{
 				if (__instance.CurObject.IsHeld)
@@ -22,9 +21,12 @@ namespace PotatoesSoup
 				}
 				else
 				{
+					FVRInteractiveObject bolt = null;
+					if (__instance.CurObject is ClosedBoltWeapon) bolt = (__instance.CurObject as ClosedBoltWeapon).Bolt;
+					if (__instance.CurObject is BoltActionRifle) bolt = (__instance.CurObject as BoltActionRifle).BoltHandle;
+					if (__instance.CurObject is Handgun) bolt = (__instance.CurObject as Handgun).Slide;
 					//this checks if the curobj is considered bolt braced
-					if (__instance.CurObject.transform.parent == BoltBrace_PlayerHeadLock.Instance.transform)
-						return false;
+					if(bolt != null && bolt.IsHeld) return false;
 				}
 				__instance.CurObject.transform.position = __instance.CurObject.transform.position + dir;
 				__instance.CurObject.RootRigidbody.velocity = Vector3.zero;
@@ -36,7 +38,7 @@ namespace PotatoesSoup
 		[HarmonyPrefix]
 		public static bool QBfuPatch(FVRQuickBeltSlot __instance)
 		{
-			if(BepInExPlugin.EnableAccurateQBslots.Value && __instance.CurObject.DoesQuickbeltSlotFollowHead) return false;
+			if(BepInExPlugin.EnableAccurateQBslots.Value && __instance.m_isKeepingTrackWithHead) return false;
 			return true;
 		}
 
@@ -92,7 +94,7 @@ namespace PotatoesSoup
 		[HarmonyPostfix]
 		public static void QBMoveContentsPatch(FVRQuickBeltSlot __instance)
 		{
-			if (BepInExPlugin.EnableAccurateQBslots.Value && __instance.CurObject.DoesQuickbeltSlotFollowHead)
+			if (BepInExPlugin.EnableAccurateQBslots.Value && __instance.m_isKeepingTrackWithHead)
 			{
 				if (__instance.CurObject != null)
 				{
@@ -100,8 +102,6 @@ namespace PotatoesSoup
 					{
 						return;
 					}
-					
-					__instance.CurObject.transform.position = __instance.PoseOverride.transform.position;
 
 					if (__instance.IsPlayer &&
 					    __instance.CurObject.DoesQuickbeltSlotFollowHead &&
@@ -119,6 +119,23 @@ namespace PotatoesSoup
 							__instance.PoseOverride.localRotation = Quaternion.identity;
 						}
 					}
+					
+					if (__instance.CurObject.IsHeld)
+					{
+						return;
+					}
+					else
+					{
+						FVRInteractiveObject bolt = null;
+						if (__instance.CurObject is ClosedBoltWeapon) bolt = (__instance.CurObject as ClosedBoltWeapon).Bolt;
+						if (__instance.CurObject is BoltActionRifle) bolt = (__instance.CurObject as BoltActionRifle).BoltHandle;
+						if (__instance.CurObject is Handgun) bolt = (__instance.CurObject as Handgun).Slide;
+						//this checks if the curobj is considered bolt braced
+						if(bolt != null && bolt.IsHeld) return;
+					}
+					
+					__instance.CurObject.transform.position = __instance.PoseOverride.transform.position;
+					__instance.CurObject.transform.rotation = __instance.PoseOverride.transform.rotation;
 				}
 			}
 		}

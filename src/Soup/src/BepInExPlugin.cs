@@ -23,7 +23,7 @@ namespace PotatoesSoup
 			Harmony.CreateAndPatchAll(typeof(BoltBrace));
 			Harmony.CreateAndPatchAll(typeof(BoltBrace_PlayerHeadLock));
 			Harmony.CreateAndPatchAll(typeof(ThumbBullet));
-			Harmony.CreateAndPatchAll(typeof(BetterQBslots));
+			//Harmony.CreateAndPatchAll(typeof(BetterQBslots));
 			Harmony.CreateAndPatchAll(typeof(BoltActionRifleDecocking));
 			Harmony.CreateAndPatchAll(typeof(ClearStabilization));
 			Harmony.CreateAndPatchAll(typeof(BetterPanels));
