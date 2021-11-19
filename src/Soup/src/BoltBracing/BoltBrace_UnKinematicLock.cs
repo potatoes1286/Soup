@@ -2,7 +2,7 @@
 using FistVR;
 using UnityEngine;
 
-namespace Plugin
+namespace PotatoesSoup
 {
 	public class BoltBrace_UnKinematicLock : MonoBehaviour
 	{

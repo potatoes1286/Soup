@@ -3,7 +3,7 @@ using HarmonyLib;
 using UnityEngine;
 using Debug = System.Diagnostics.Debug;
 
-namespace Plugin
+namespace PotatoesSoup
 {
 	public class ThumbBullet : MonoBehaviour
 	{

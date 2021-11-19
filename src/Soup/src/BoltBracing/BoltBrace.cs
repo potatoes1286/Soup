@@ -2,7 +2,7 @@
 using HarmonyLib;
 using UnityEngine;
 
-namespace Plugin
+namespace PotatoesSoup
 {
 	public class BoltBrace : MonoBehaviour
 	{
@@ -114,20 +114,6 @@ namespace Plugin
 				}
 			}
 			return true;
-		}
-		
-		//stops anton's bolt locking feature because i dont like it. cope, and seethe
-		[HarmonyPatch(typeof(ClosedBolt), "UpdateBolt")]
-		[HarmonyPostfix]
-		public static void BoltBrace_RemoveBoltLock_Fix(ClosedBolt __instance)
-		{
-			if (__instance.CurPos >= ClosedBolt.BoltPos.Locked && ((__instance.HasLastRoundBoltHoldOpen && __instance.Weapon.Magazine != null && !__instance.Weapon.Magazine.HasARound() && !__instance.Weapon.Chamber.IsFull) || __instance.Weapon.IsBoltCatchButtonHeld))
-			{
-				if (__instance.m_isBoltLocked)
-				{
-					__instance.m_isBoltLocked = false;
-				}
-			}
 		}
 	}
 }

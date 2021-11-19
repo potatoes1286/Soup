@@ -6,7 +6,7 @@ using FistVR;
 using HarmonyLib;
 using UnityEngine;
 
-namespace Plugin
+namespace PotatoesSoup
 {
 	public class DecockingRevolver : MonoBehaviour
 	{

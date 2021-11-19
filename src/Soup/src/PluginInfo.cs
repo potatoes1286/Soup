@@ -1,4 +1,4 @@
-namespace Plugin
+namespace PotatoesSoup
 {
 	internal static class PluginInfo
 	{

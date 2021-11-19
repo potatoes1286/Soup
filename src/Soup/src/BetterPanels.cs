@@ -1,10 +1,8 @@
-﻿using System;
-using FistVR;
+﻿using FistVR;
 using HarmonyLib;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
-namespace Plugin
+namespace PotatoesSoup
 {
 	public class BetterPanels : MonoBehaviour
 	{

@@ -1,10 +1,8 @@
-﻿using System;
-using FistVR;
+﻿using FistVR;
 using HarmonyLib;
 using UnityEngine;
-using Debug = System.Diagnostics.Debug;
 
-namespace Plugin
+namespace PotatoesSoup
 {
 	public class BoltBrace_PlayerHeadLock : MonoBehaviour
 	{

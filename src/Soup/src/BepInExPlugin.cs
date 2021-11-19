@@ -1,11 +1,8 @@
-﻿using System;
-using BepInEx;
+﻿using BepInEx;
 using BepInEx.Configuration;
-using H3VRUtilsConfig.QOLPatches;
 using HarmonyLib;
-using Plugin;
 
-namespace Plugin
+namespace PotatoesSoup
 {
 	[BepInPlugin(PluginInfo.GUID, PluginInfo.NAME, PluginInfo.VERSION)]
 	[BepInProcess("h3vr.exe")]
