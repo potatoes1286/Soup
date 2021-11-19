@@ -59,7 +59,7 @@ namespace PotatoesSoup
 			else
 			{
 				//is braced- unbrace
-				if (__instance.IsHeld || __instance.IsAltHeld || __instance.Slide.CurPos == HandgunSlide.SlidePos.Rear || !__instance.Slide.IsHeld)
+				if (__instance.IsHeld || __instance.IsAltHeld || __instance.Slide.CurPos != HandgunSlide.SlidePos.Rear || !__instance.Slide.IsHeld)
 				{
 					__instance.transform.parent = null;
 					__instance.SetIsKinematicLocked(false);
