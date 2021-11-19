@@ -29,7 +29,6 @@ namespace PotatoesSoup
 						{
 							float num = Vector3.Distance(mount.transform.position,
 								item.Sensor.transform.position);
-							Debug.Log(num);
 							if (num <= 0.15f) nearAttachmentPoint = true;
 						}
 						
