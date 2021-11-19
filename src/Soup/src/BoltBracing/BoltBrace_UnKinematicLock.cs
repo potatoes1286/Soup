@@ -1,6 +1,6 @@
-﻿using System;
-using FistVR;
+﻿using FistVR;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
 
 namespace PotatoesSoup
 {
@@ -15,11 +15,12 @@ namespace PotatoesSoup
 
 			if (physobj is ClosedBoltWeapon) bolt = (physobj as ClosedBoltWeapon).Bolt;
 			if (physobj is BoltActionRifle) bolt = (physobj as BoltActionRifle).BoltHandle;
+			if (physobj is Handgun) bolt = (physobj as Handgun).Slide;
 		}
 
 		public void Update()
 		{
-			if (!physobj.IsHeld && !physobj.IsAltHeld && !bolt.IsHeld)
+			if (!physobj.IsHeld && !physobj.IsAltHeld && !bolt.IsHeld && physobj.TimeSinceInQuickbelt != 0)
 			{
 				physobj.SetIsKinematicLocked(false);
 				Destroy(this);
