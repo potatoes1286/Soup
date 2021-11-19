@@ -1,6 +1,7 @@
 # Potatoes' Soup
 
 If you need to contact me, you can do so on [homebrew.](https://discord.gg/83yTrfr)
+
 Download on [Thunderstore](https://h3vr.thunderstore.io/package/Potatoes/Potatoes_Soup/)
 
 Potatoes' Soup is a much of mixed ingredients to make your H3VR game a lot better!
