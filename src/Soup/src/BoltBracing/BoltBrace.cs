@@ -15,7 +15,11 @@ namespace PotatoesSoup
 			if (__instance.transform.parent != BoltBrace_PlayerHeadLock.Instance.transform)
 			{
 				//is not braced- braced
-				if (!__instance.IsHeld && !__instance.IsAltHeld && __instance.Bolt.CurPos == ClosedBolt.BoltPos.Rear && __instance.Bolt.IsHeld)
+				if    (!__instance.IsHeld
+				    && !__instance.IsAltHeld
+				    && __instance.Bolt.CurPos == ClosedBolt.BoltPos.Rear
+				    && __instance.Bolt.IsHeld
+					&& !__instance.IsKinematicLocked)
 				{
 					if (__instance.IsShoulderStabilized())
 					{
@@ -46,7 +50,11 @@ namespace PotatoesSoup
 			if (__instance.transform.parent != BoltBrace_PlayerHeadLock.Instance.transform)
 			{
 				//is not braced- braced
-				if (!__instance.IsHeld && !__instance.IsAltHeld && __instance.Slide.CurPos == HandgunSlide.SlidePos.Rear && __instance.Slide.IsHeld)
+				if    (!__instance.IsHeld
+				    && !__instance.IsAltHeld
+				    && __instance.Slide.CurPos == HandgunSlide.SlidePos.Rear
+				    && __instance.Slide.IsHeld
+				    && !__instance.IsKinematicLocked)
 				{
 					if (__instance.IsShoulderStabilized())
 					{
@@ -77,7 +85,11 @@ namespace PotatoesSoup
 			if (__instance.transform.parent != BoltBrace_PlayerHeadLock.Instance.transform)
 			{
 				//is not braced- braced
-				if (!__instance.IsHeld && !__instance.IsAltHeld && __instance.CurBoltHandleState == BoltActionRifle_Handle.BoltActionHandleState.Rear && __instance.BoltHandle.IsHeld)
+				if    (!__instance.IsHeld
+				    && !__instance.IsAltHeld
+				    && __instance.CurBoltHandleState == BoltActionRifle_Handle.BoltActionHandleState.Rear
+				    && __instance.BoltHandle.IsHeld
+				    && !__instance.IsKinematicLocked)
 				{
 					if (__instance.IsShoulderStabilized())
 					{
