@@ -28,6 +28,7 @@ namespace PotatoesSoup
 			Harmony.CreateAndPatchAll(typeof(ClearStabilization));
 			Harmony.CreateAndPatchAll(typeof(BetterPanels));
 			Harmony.CreateAndPatchAll(typeof(EasyAttaching));
+			Harmony.CreateAndPatchAll(typeof(PalmRacking));
 		}
 	}
 }
