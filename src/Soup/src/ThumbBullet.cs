@@ -27,7 +27,12 @@ namespace PotatoesSoup
 				if (__instance.Firearm is Handgun)			io =		  (__instance.Firearm as Handgun).Slide;
 				if (io.IsHeld)
 				{
-					if (__instance.Firearm.Magazine != null && __result != null  && io.m_hand.Input.TouchpadPressed)
+					bool activate = false;
+					if (io.m_hand.IsInStreamlinedMode == false)
+						activate = io.m_hand.Input.TouchpadPressed;
+					else
+						activate = io.m_hand.Input.AXButtonPressed;
+					if (__instance.Firearm.Magazine != null && __result != null  && activate)
 					{
 						if (!__result.IsSpent)
 						{
@@ -43,6 +48,7 @@ namespace PotatoesSoup
 		}
 		
 		//Look Bro! My third transpile! Copy pasted- again! kinda. its better now
+		//i failed the transpile. time for the safe harbor of prefixes
 		[HarmonyPatch(typeof(ClosedBolt), nameof(ClosedBolt.UpdateInteraction))]
 		[HarmonyPrefix]
 		public static bool RemoveAntonsBoltLock(ClosedBolt __instance, ref FVRViveHand hand)

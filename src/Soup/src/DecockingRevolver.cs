@@ -18,7 +18,12 @@ namespace PotatoesSoup
 			{
 				if (__instance.m_hand != null)
 				{
-					if (__instance.m_hand.Input.TouchpadPressed)
+					bool activate = false;
+					if (__instance.m_hand.IsInStreamlinedMode == false)
+						activate = __instance.m_hand.Input.TouchpadPressed;
+					else
+						activate = __instance.m_hand.Input.AXButtonPressed;
+					if (activate)
 					{
 						//un-fire the chamber round lol
 						__instance.Chambers[__instance.CurChamber].IsSpent = false;
