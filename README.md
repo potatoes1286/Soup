@@ -33,3 +33,6 @@ Full list of additions/changes
 - Can be disabled in the config
 ##### Better Panels
 - Panels now spawn locked in place
+##### Palm Racking
+- Holding grip on your empty hand then hovering over a bolt will automatically grab the bolt. This allows you to hold grip then swipe over a bolt and quickly rack it.
+- Works on closed bolt guns, open bolt guns, and bolt action guns
