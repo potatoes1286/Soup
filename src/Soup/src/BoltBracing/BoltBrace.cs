@@ -21,7 +21,7 @@ namespace PotatoesSoup
 				    && __instance.Bolt.IsHeld
 					&& !__instance.IsKinematicLocked)
 				{
-					if (__instance.IsShoulderStabilized())
+					if (__instance.IsShoulderStabilized() && __instance.Bipod == null)
 					{
 						__instance.SetIsKinematicLocked(true);
 						__instance.transform.parent = BoltBrace_PlayerHeadLock.Instance.transform;
@@ -56,7 +56,7 @@ namespace PotatoesSoup
 				    && __instance.Slide.IsHeld
 				    && !__instance.IsKinematicLocked)
 				{
-					if (__instance.IsShoulderStabilized())
+					if (__instance.IsShoulderStabilized() && __instance.Bipod == null)
 					{
 						__instance.SetIsKinematicLocked(true);
 						__instance.transform.parent = BoltBrace_PlayerHeadLock.Instance.transform;
@@ -91,7 +91,7 @@ namespace PotatoesSoup
 				    && __instance.BoltHandle.IsHeld
 				    && !__instance.IsKinematicLocked)
 				{
-					if (__instance.IsShoulderStabilized())
+					if (__instance.IsShoulderStabilized() && __instance.Bipod == null)
 					{
 						__instance.SetIsKinematicLocked(true);
 						__instance.transform.parent = BoltBrace_PlayerHeadLock.Instance.transform;
