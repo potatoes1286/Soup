@@ -20,7 +20,7 @@ namespace PotatoesSoup
 			    __instance is FVRFireArmRound ||
 			    __instance is FVRVerticleRope)
 			{
-				if (hand.Input.GripPressed && hand.CurrentInteractable == null)
+				if (hand.Input.IsGrabbing && hand.m_state == FVRViveHand.HandState.Empty)
 				{
 					hand.ForceSetInteractable(__instance);
 				}
