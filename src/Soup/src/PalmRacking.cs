@@ -16,7 +16,8 @@ namespace PotatoesSoup
 			    __instance is OpenBoltReceiverBolt ||
 			    __instance is OpenBoltChargingHandle ||
 			    __instance is BoltActionRifle_Handle ||
-			    __instance is HandgunSlide)
+			    __instance is HandgunSlide ||
+			    __instance is FVRFireArmRound)
 			{
 				if (hand.Input.GripPressed && hand.CurrentInteractable == null)
 				{
