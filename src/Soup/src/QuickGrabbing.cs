@@ -17,7 +17,6 @@ namespace PotatoesSoup
 			    __instance is OpenBoltChargingHandle ||
 			    __instance is BoltActionRifle_Handle ||
 			    __instance is HandgunSlide ||
-			    __instance is FVRFireArmRound ||
 			    __instance is FVRHandGrabPoint ||
 			    __instance is PinnedGrenade ||
 			    __instance is FVRCappedGrenade ||
