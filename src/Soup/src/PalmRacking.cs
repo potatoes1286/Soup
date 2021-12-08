@@ -18,10 +18,22 @@ namespace PotatoesSoup
 			    __instance is BoltActionRifle_Handle ||
 			    __instance is HandgunSlide ||
 			    __instance is FVRFireArmRound ||
-			    __instance is FVRVerticleRope)
+			    __instance is FVRHandGrabPoint ||
+			    __instance is PinnedGrenade ||
+			    __instance is FVRCappedGrenade ||
+			    __instance is SosigWeaponPlayerInterface)
 			{
 				if (hand.Input.IsGrabbing && hand.m_state == FVRViveHand.HandState.Empty)
 				{
+					if (__instance is SosigWeaponPlayerInterface)
+						if ((__instance as SosigWeaponPlayerInterface)!.W.Type != SosigWeapon.SosigWeaponType.Grenade) return;
+					if (__instance is FVRHandGrabPoint)
+						if (hand.OtherHand.m_currentInteractable is FVRHandGrabPoint) return;
+					/*if (__instance is BoltActionRifle_Handle) { //doesnt feel good
+						var bolt = __instance as BoltActionRifle_Handle;
+						bolt.m_wasTPInitiated = true;
+					}*/
+					__instance.BeginInteraction(hand);
 					hand.ForceSetInteractable(__instance);
 				}
 			}
