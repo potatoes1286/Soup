@@ -10,6 +10,7 @@ namespace PotatoesSoup
 		[HarmonyPostfix]
 		public static void PalmRacking_Patch(FVRInteractiveObject __instance, ref FVRViveHand hand)
 		{
+			if (!BepInExPlugin.EnableQuickGrabbing.Value) return;
 			//if it's a bolt, and you hover over it with ur hand held, grab it
 			if (__instance is ClosedBolt ||
 			    __instance is ClosedBoltHandle ||
