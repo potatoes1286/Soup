@@ -36,3 +36,5 @@ Full list of additions/changes
 ##### Palm Racking
 - Holding grip on your empty hand then hovering over a bolt will automatically grab the bolt. This allows you to hold grip then swipe over a bolt and quickly rack it.
 - Works on closed bolt guns, open bolt guns, and bolt action guns
+##### Ejector Hitting
+- Revolver ejector can now be slapped (swipe hand over, similar to MP5 handle) to eject rounds
