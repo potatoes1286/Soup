@@ -24,7 +24,7 @@ namespace PotatoesSoup
 			    __instance is PinnedGrenade ||
 			    __instance is FVRCappedGrenade ||
 			    __instance is SosigWeaponPlayerInterface) {
-				if (IsArmSwinging(hand) && __instance is not FVRHandGrabPoint) return;
+				if (BepInExPlugin.DisableQuickGrabbingWhenRunning.Value && IsArmSwinging(hand) && __instance is not FVRHandGrabPoint) return;
 				
 				if (hand.Input.IsGrabbing && hand.m_state == FVRViveHand.HandState.Empty)
 				{
@@ -32,10 +32,10 @@ namespace PotatoesSoup
 						if ((__instance as SosigWeaponPlayerInterface)!.W.Type != SosigWeapon.SosigWeaponType.Grenade) return;
 					if (__instance is FVRHandGrabPoint)
 						if (hand.OtherHand.m_currentInteractable is FVRHandGrabPoint) return;
-					/*if (__instance is BoltActionRifle_Handle) { //doesnt feel good
+					if (BepInExPlugin.EnableInstaRegrabBoltActionOnQuickGrab.Value && __instance is BoltActionRifle_Handle) { //doesnt feel good
 						var bolt = __instance as BoltActionRifle_Handle;
 						bolt.m_wasTPInitiated = true;
-					}*/
+					}
 					__instance.BeginInteraction(hand);
 					hand.ForceSetInteractable(__instance);
 				}
