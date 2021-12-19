@@ -20,18 +20,24 @@ namespace PotatoesSoup
 			    __instance is OpenBoltChargingHandle ||
 			    __instance is BoltActionRifle_Handle ||
 			    __instance is HandgunSlide ||
+			    __instance is TubeFedShotgunBolt ||
+			    __instance is TubeFedShotgunHandle ||
 			    __instance is FVRHandGrabPoint ||
 			    __instance is PinnedGrenade ||
 			    __instance is FVRCappedGrenade ||
-			    __instance is SosigWeaponPlayerInterface) {
+			    __instance is SosigWeaponPlayerInterface ||
+			    __instance is FVRAlternateGrip ||
+			    __instance is FVRFireArmGrip) {
+				//ensure not running to prevent accidental grabbing
 				if (BepInExPlugin.DisableQuickGrabbingWhenRunning.Value && IsArmSwinging(hand) && __instance is not FVRHandGrabPoint) return;
+				//ensure other hand is not the same item
+				if (__instance == hand.OtherHand.CurrentInteractable) return;
 				
 				if (hand.Input.IsGrabbing && hand.m_state == FVRViveHand.HandState.Empty)
 				{
 					if (__instance is SosigWeaponPlayerInterface)
 						if ((__instance as SosigWeaponPlayerInterface)!.W.Type != SosigWeapon.SosigWeaponType.Grenade) return;
-					if (__instance is FVRHandGrabPoint)
-						if (hand.OtherHand.m_currentInteractable is FVRHandGrabPoint) return;
+					
 					if (BepInExPlugin.EnableInstaRegrabBoltActionOnQuickGrab.Value && __instance is BoltActionRifle_Handle) { //doesnt feel good
 						var bolt = __instance as BoltActionRifle_Handle;
 						bolt.m_wasTPInitiated = true;
