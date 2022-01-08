@@ -28,7 +28,8 @@ namespace PotatoesSoup
 			    __instance is SosigWeaponPlayerInterface ||
 			    __instance is FVRAlternateGrip ||
 			    __instance is FVRFireArmGrip ||
-				__instance is FVRFireArmTopCover) {
+				__instance is FVRFireArmTopCover ||
+				__instance is TubeFedShotgunBolt) {
 				//ensure not running to prevent accidental grabbing
 				if (BepInExPlugin.DisableQuickGrabbingWhenRunning.Value && IsArmSwinging(hand) && __instance is not FVRHandGrabPoint) return;
 				//ensure other hand is not the same item
