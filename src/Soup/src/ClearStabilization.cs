@@ -24,13 +24,13 @@ namespace PotatoesSoup
 			return true;
 		}
 		
-		/*[HarmonyPatch(typeof(FVRViveHand), "CurrentInteractable_set")]
+		[HarmonyPatch(typeof(FVRViveHand), "CurrentInteractable", MethodType.Setter)]
 		[HarmonyPrefix]
 		public static bool ClearStabilization_ResetOtherHand_Patch(FVRViveHand __instance)
 		{
 			ReDisplayViveHand(ref __instance.OtherHand);
 			return true;
-		}*/
+		}
 
 
 		public static void ReDisplayViveHand(ref FVRViveHand hand)
