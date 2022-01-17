@@ -32,8 +32,26 @@ namespace PotatoesSoup
 							if (num <= 0.15f) nearAttachmentPoint = true;
 						}
 						
-						if (nearAttachmentPoint) __instance.SetAllCollidersToLayer(false, "NoCol");
-						else __instance.SetAllCollidersToLayer(false, "Default");
+						if (nearAttachmentPoint)
+						{
+							foreach (Collider collider2 in __instance.m_colliders)
+							{
+								if (collider2 != null && !collider2.isTrigger && collider2.gameObject.layer == LayerMask.NameToLayer("Default"))
+								{
+									collider2.gameObject.layer = LayerMask.NameToLayer("NoCol");
+								}
+							}
+						}
+						else
+						{
+							foreach (Collider collider2 in __instance.m_colliders)
+							{
+								if (collider2 != null && !collider2.isTrigger && collider2.gameObject.layer == LayerMask.NameToLayer("NoCol"))
+								{
+									collider2.gameObject.layer = LayerMask.NameToLayer("Default");
+								}
+							}
+						}
 					}
 				}
 			}
