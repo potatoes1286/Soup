@@ -8,6 +8,10 @@ Potatoes' Soup is a much of mixed ingredients to make your H3VR game a lot bette
 
 Full list of additions/changes
 
+##### Base Game Patches
+- The size of a laser's red dot is no longer dependant on the distance between the dot and the gun, but on the distance between the dot and the player. (In the base game, the laser pointer being very far away will cause the dot to be very big if you are near the dot.)
+- Corrects the Madsen LAR and Panzerschreck sizes to be correct (Not very noticable on the Panzerschreck, but very much so for Madsen. Panzerschreck changed from a bore size of 95mm to 88mm, Madsen sized down from 1230mm to 1080mm)
+- BreakActionWeapons no longer break from adding a suppressor
 ##### Bolt Bracing
 - Holding the bolt back on a gun and letting go of the foregrip and grip while shouldering the gun will keep it in place, freeing up one hand while leaving the bolt open
 - Very useful for locking a bolt back on a gun like the SKS to fill it up
@@ -24,17 +28,17 @@ Full list of additions/changes
 - Distance before hiding offhand can be changed in the config
 ##### Double Action Revolver Decocking
 - Holding down the touchpad while pulling the trigger on a cocked double action will now decock the revolver
-##### Laser Pointer Patch
-- The size of a laser's red dot is no longer dependant on the distance between the dot and the gun, but on the distance between the dot and the player. (In the base game, the laser pointer being very far away will cause the dot to be very big if you are near the dot.)
 ##### Bolt Action Manipulation
 - Up on the touchpad now cocks the hammer if it is decocked
 ##### Easy Attaching
 - Attachments will now phase through held guns, making it easier to attach attachments
 - Can be disabled in the config
 ##### Better Panels
-- Panels now spawn locked in place
+- Options panel now spawn locked in place
 ##### Palm Racking
 - Holding grip on your empty hand then hovering over a bolt will automatically grab the bolt. This allows you to hold grip then swipe over a bolt and quickly rack it.
 - Works on closed bolt guns, open bolt guns, and bolt action guns
 ##### Ejector Hitting
 - Revolver ejector can now be slapped (swipe hand over, similar to MP5 handle) to eject rounds
+##### Single Action Counter-Clockwise Rotation
+- Single action revolver cylinders can be rotated counter-clockwise with up on the touchpad
