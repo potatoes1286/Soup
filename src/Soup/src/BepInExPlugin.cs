@@ -25,7 +25,7 @@ namespace PotatoesSoup
 			DisableQuickGrabbingWhenRunning = Config.Bind("Quick Grabbing", "Disable Quick Grabbing On Running", true, "When true, Quick Grab will be disabled when running in Armswinger to prevent accidental grabs.");
 			EnableInstaRegrabBoltActionOnQuickGrab = Config.Bind("Quick Grabbing", "Enable Regrab Bolt Action When Quickgrabbing Bolt", false, "When true, if you close the bolt on a bolt action after quick-grabbing it, you will automatically regrab the gun. Doesn't feel very nice, though.");
 			Harmony.CreateAndPatchAll(typeof(DecockingRevolver));
-			Harmony.CreateAndPatchAll(typeof(LaserPointerPatch));
+			Harmony.CreateAndPatchAll(typeof(BaseGamePatch));
 			Harmony.CreateAndPatchAll(typeof(BoltBrace));
 			Harmony.CreateAndPatchAll(typeof(BoltBrace_PlayerHeadLock));
 			Harmony.CreateAndPatchAll(typeof(ThumbBullet));
