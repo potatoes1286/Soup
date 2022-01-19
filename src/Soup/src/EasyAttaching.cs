@@ -13,7 +13,7 @@ namespace PotatoesSoup
 			//If the player is holding an object and an attachment,
 			//if the attachment is then near a mount of the object held in the other hand, (tolerance: 15cm)
 			//then disable all colliders. otherwise, enable them.
-			if (!BepInExPlugin.EnableEasyAttaching.Value) return;
+			if (!BepInExPlugin.EasyAttaching_IsEnabled.Value) return;
 			if (__instance is FVRFireArmAttachment)
 			{
 				var item = __instance as FVRFireArmAttachment;

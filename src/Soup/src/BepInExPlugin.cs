@@ -8,22 +8,56 @@ namespace PotatoesSoup
 	[BepInProcess("h3vr.exe")]
 	public class BepInExPlugin : BaseUnityPlugin
 	{
-		public static ConfigEntry<bool> EnableClearStabilization;
-		public static ConfigEntry<float> ClearStabilizationThreshhold;
-		public static ConfigEntry<bool> EnableAccurateQBslots;
-		public static ConfigEntry<bool> EnableEasyAttaching;
-		public static ConfigEntry<bool> EnableQuickGrabbing;
-		public static ConfigEntry<bool> DisableQuickGrabbingWhenRunning;
-		public static ConfigEntry<bool> EnableInstaRegrabBoltActionOnQuickGrab;
+		#region Configs
+		//general
+		
+		//other
+		public const  string            SETTING_OTHER_NAME = "Other";
+		public static ConfigEntry<bool> EasyAttaching_IsEnabled;
+		public static ConfigEntry<bool> AccurateQBSlots_IsEnabled;
+		private void SetConfig_Other()
+		{
+			//EnableAccurateQBslots = Config.Bind("General Settings", "Accurate QB Slots", true, "Removes QB slot delay. Can / does cause slowdown.");
+			EasyAttaching_IsEnabled = Config.Bind(SETTING_OTHER_NAME, "Enable Easy Attaching", true, "Enables Easy Attaching");
+		}
+
+		//quick grabbing
+		public const  string            SETTING_QG_NAME = "Quick Grabbing";
+		public static ConfigEntry<bool> QuickGrabbing_IsEnabled;
+		public static ConfigEntry<bool> QuickGrabbing_DisableWhenRunning;
+		public static ConfigEntry<bool> QuickGrabbing_RegrabBolt;
+		public static ConfigEntry<bool> QuickGrabbing_GrabFores;
+		private void SetConfig_QuickGrabbing()
+		{
+			QuickGrabbing_IsEnabled = Config.Bind(SETTING_QG_NAME, "Is Enabled", true, "Enables Quick Grabbing");
+			QuickGrabbing_DisableWhenRunning = Config.Bind(SETTING_QG_NAME, "Disable When Running", true, "When true, Quick Grab will be disabled when running in Armswinger to prevent accidental grabs.");
+			QuickGrabbing_RegrabBolt = Config.Bind(SETTING_QG_NAME, "Enable Re-grabbing Gun When Quick Grabbing Bolt (Bolt Action Only)", false, "When true, if you close the bolt on a bolt action after quick-grabbing it, you will automatically regrab the gun.");
+			QuickGrabbing_GrabFores = Config.Bind(SETTING_QG_NAME, "Enable Grabbing Foregrips", false, "Allows Quick Grabbing to apply to foregrips");
+		}
+		
+		//clear stab
+		public const  string             SETTING_CS_NAME = "Clear Stabilization";
+		public static ConfigEntry<bool>  ClearStab_IsEnabled;
+		public static ConfigEntry<float> ClearStab_Treshhold;
+		private void SetConfig_ClearStab()
+		{
+			ClearStab_IsEnabled = Config.Bind(SETTING_CS_NAME, "Is Enabled", true, "Hides your offhand if you're stabilizing a gun with it.");
+			ClearStab_Treshhold = Config.Bind(SETTING_CS_NAME, "Treshhold", 0.09f, "Distance, in metres, you must be from the hand holding the gun to activate clear stabilization.");
+		}
+
+		public void SetConfigs()
+		{
+			SetConfig_Other();
+			SetConfig_QuickGrabbing();
+			SetConfig_ClearStab();
+		}
+		#endregion
+		
+		
+		
 		public void Start()
 		{
-			EnableClearStabilization = Config.Bind("General Settings", "Clear Stabilization", true, "Hides your offhand if you're stabilizing a gun with it.");
-			ClearStabilizationThreshhold = Config.Bind("General Settings", "Clear Stabilization Threshhold", 0.09f, "Distance, in metres, you must be from the hand holding the gun to activate clear stabilization.");
-			//EnableAccurateQBslots = Config.Bind("General Settings", "Accurate QB Slots", true, "Removes QB slot delay. Can / does cause slowdown.");
-			EnableEasyAttaching = Config.Bind("General Settings", "Easy Attaching", true, "Enables Easy Attaching");
-			EnableQuickGrabbing = Config.Bind("Quick Grabbing", "Enable Quick Grabbing", true, "Enables Quick Grabbing");
-			DisableQuickGrabbingWhenRunning = Config.Bind("Quick Grabbing", "Disable Quick Grabbing On Running", true, "When true, Quick Grab will be disabled when running in Armswinger to prevent accidental grabs.");
-			EnableInstaRegrabBoltActionOnQuickGrab = Config.Bind("Quick Grabbing", "Enable Regrab Bolt Action When Quickgrabbing Bolt", false, "When true, if you close the bolt on a bolt action after quick-grabbing it, you will automatically regrab the gun. Doesn't feel very nice, though.");
+			SetConfigs();
 			Harmony.CreateAndPatchAll(typeof(DecockingRevolver));
 			Harmony.CreateAndPatchAll(typeof(BaseGamePatch));
 			Harmony.CreateAndPatchAll(typeof(BoltBrace));
@@ -46,6 +80,6 @@ namespace PotatoesSoup
 	{
 		internal const string NAME = "Potatoes' Soup";
 		internal const string GUID = "dll.potatoes1286.soup";
-		internal const string VERSION = "4.0.0";
+		internal const string VERSION = "4.0.1";
 	}
 }

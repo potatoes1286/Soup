@@ -14,14 +14,15 @@ namespace PotatoesSoup
 			return true;
 		}*/
 		
-		[HarmonyPatch(typeof(FVRInteractiveObject), "EndInteraction")]
+		[HarmonyPatch(typeof(FVRInteractiveObject), "UpdateInteraction")]
+		[HarmonyPrefix]
 		public static bool RemoveClipCorrectly(FVRInteractiveObject __instance, ref FVRViveHand hand)
 		{
 			if (__instance is FVRFireArmClip)
 			{
-				Debug.Log("I am a clip!");
 				var clip = __instance as FVRFireArmClip;
 				float dist = Vector3.Distance(clip.transform.position, hand.transform.position);
+				Debug.Log(dist);
 				if (dist >= clipejectdist)
 				{
 					Debug.Log("Let me go!");

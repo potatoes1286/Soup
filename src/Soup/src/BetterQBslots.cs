@@ -12,7 +12,7 @@ namespace PotatoesSoup
 		[HarmonyPrefix]
 		public static bool QBRemoveCode_Patch(FVRQuickBeltSlot __instance, ref Vector3 dir)
 		{
-			if(BepInExPlugin.EnableAccurateQBslots.Value && __instance.m_isKeepingTrackWithHead) return false;
+			if(BepInExPlugin.AccurateQBSlots_IsEnabled.Value && __instance.m_isKeepingTrackWithHead) return false;
 			if (__instance.CurObject != null)
 			{
 				if (__instance.CurObject.IsHeld)
@@ -38,7 +38,7 @@ namespace PotatoesSoup
 		[HarmonyPrefix]
 		public static bool QBfuPatch(FVRQuickBeltSlot __instance)
 		{
-			if(BepInExPlugin.EnableAccurateQBslots.Value && __instance.m_isKeepingTrackWithHead) return false;
+			if(BepInExPlugin.AccurateQBSlots_IsEnabled.Value && __instance.m_isKeepingTrackWithHead) return false;
 			return true;
 		}
 
@@ -94,7 +94,7 @@ namespace PotatoesSoup
 		[HarmonyPostfix]
 		public static void QBMoveContentsPatch(FVRQuickBeltSlot __instance)
 		{
-			if (BepInExPlugin.EnableAccurateQBslots.Value && __instance.m_isKeepingTrackWithHead)
+			if (BepInExPlugin.AccurateQBSlots_IsEnabled.Value && __instance.m_isKeepingTrackWithHead)
 			{
 				if (__instance.CurObject != null)
 				{
