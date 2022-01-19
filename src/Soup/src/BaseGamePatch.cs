@@ -1,5 +1,7 @@
 ﻿using System;
 using FistVR;
+using H3VRUtils;
+using H3VRUtils.UniqueCode;
 using HarmonyLib;
 using UnityEngine;
 
@@ -38,6 +40,21 @@ namespace PotatoesSoup
 				__instance.transform.localScale = new Vector3(0.88f, 0.88f, 0.88f);
 			if (__instance.ObjectWrapper.ItemID == "PanzerSchreck54")
 				__instance.transform.localScale = new Vector3(0.95f, 0.95f, 1f);
+			return true;
+		}
+		
+		[HarmonyPatch(typeof(FVRPhysicalObject), "Awake")]
+		[HarmonyPrefix]
+		public static bool FVRFireArm_Awake_AddMagDump(FVRPhysicalObject __instance)
+		{
+			if (__instance.ObjectWrapper == null) return true;
+			if (__instance.ObjectWrapper.ItemID == "M1912")
+			{
+				var comp = __instance.gameObject.AddComponent<DumpInternalMag>();
+				comp.presstoejectbutton = H3VRUtilsMagRelease.TouchpadDirType.Left;
+				comp.handgun = __instance as Handgun;
+			}
+
 			return true;
 		}
 	}
