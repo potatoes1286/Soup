@@ -27,8 +27,12 @@ namespace PotatoesSoup
 						bool nearAttachmentPoint = false;
 						foreach (var mount in fvrfireArm.AttachmentMounts)
 						{
-							float num = Vector3.Distance(mount.transform.position,
-								item.Sensor.transform.position);
+							//Error handle because of course some guns do this.
+							if (mount == null) {
+								Debug.LogError($"{fvrfireArm.ObjectWrapper.name} has a missing attachment mount field. What? --Soup");
+								continue;
+							}
+							float num = Vector3.Distance(mount.transform.position, item.Sensor.transform.position);
 							if (num <= 0.15f) nearAttachmentPoint = true;
 						}
 						
