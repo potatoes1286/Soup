@@ -13,7 +13,7 @@ Full list of additions/changes
 - Corrects the Madsen LAR and Panzerschreck sizes to be correct (Not very noticable on the Panzerschreck, but very much so for Madsen. Panzerschreck changed from a bore size of 95mm to 88mm, Madsen sized down from 1230mm to 1080mm)
 - BreakActionWeapons no longer break from adding a suppressor
 ##### Bolt Bracing
-- Holding the bolt back on a gun and letting go of the foregrip and grip while shouldering the gun will keep it in place, freeing up one hand while leaving the bolt open
+- For guns that have a stock, you can brace the stock against your body, pull the bolt back with one hand, and then let go of the gun with your other hand. This frees up one hand while keeping the bolt open with the other.
 - Very useful for locking a bolt back on a gun like the SKS to fill it up
 - Works on Bolt Action rifles, Closed Bolt guns, and handguns which have a stock
 - Does not work with charging handles
