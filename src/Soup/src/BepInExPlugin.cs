@@ -27,12 +27,14 @@ namespace PotatoesSoup
 		public static ConfigEntry<bool> QuickGrabbing_DisableWhenRunning;
 		public static ConfigEntry<bool> QuickGrabbing_RegrabBolt;
 		public static ConfigEntry<bool> QuickGrabbing_GrabFores;
+		public static ConfigEntry<bool> QuickGrabbing_GrabPistolSlides;
 		private void SetConfig_QuickGrabbing()
 		{
 			QuickGrabbing_IsEnabled = Config.Bind(SETTING_QG_NAME, "Is Enabled", true, "Enables Quick Grabbing");
 			QuickGrabbing_DisableWhenRunning = Config.Bind(SETTING_QG_NAME, "Disable When Running", true, "When true, Quick Grab will be disabled when running in Armswinger to prevent accidental grabs.");
 			QuickGrabbing_RegrabBolt = Config.Bind(SETTING_QG_NAME, "Enable Re-grabbing Gun When Quick Grabbing Bolt (Bolt Action Only)", false, "When true, if you close the bolt on a bolt action after quick-grabbing it, you will automatically regrab the gun.");
 			QuickGrabbing_GrabFores = Config.Bind(SETTING_QG_NAME, "Enable Grabbing Foregrips", false, "Allows Quick Grabbing to apply to foregrips");
+			QuickGrabbing_GrabPistolSlides = Config.Bind(SETTING_QG_NAME, "Enable Grabbing Pistol Slides", true, "Allows Quick Grabbing to apply to pistol slides");
 		}
 		
 		//clear stab

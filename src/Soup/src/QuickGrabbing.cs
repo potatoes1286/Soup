@@ -14,21 +14,24 @@ namespace PotatoesSoup
 			if (hand.m_currentHoveredQuickbeltSlot != null) return;
 			
 			//if it's a bolt, and you hover over it with ur hand held, grab it
+			//i sure do hope this is not an expensive call!
 			if (__instance is ClosedBolt ||
 			    __instance is ClosedBoltHandle ||
 			    __instance is OpenBoltReceiverBolt ||
 			    __instance is OpenBoltChargingHandle ||
 			    __instance is BoltActionRifle_Handle ||
-			    __instance is HandgunSlide ||
+			    (__instance is HandgunSlide					&& BepInExPlugin.QuickGrabbing_GrabPistolSlides.Value) ||
 			    __instance is TubeFedShotgunBolt ||
 			    __instance is TubeFedShotgunHandle ||
 			    __instance is FVRHandGrabPoint ||
 			    __instance is PinnedGrenade ||
 			    __instance is FVRCappedGrenade ||
 			    __instance is SosigWeaponPlayerInterface ||
-			    __instance is FVRAlternateGrip && BepInExPlugin.QuickGrabbing_GrabFores.Value ||
-			    __instance is FVRFireArmGrip && BepInExPlugin.QuickGrabbing_GrabFores.Value ||
-				__instance is FVRFireArmTopCover && BepInExPlugin.QuickGrabbing_GrabFores.Value) {
+			    (__instance is FVRAlternateGrip				&& BepInExPlugin.QuickGrabbing_GrabFores.Value) ||
+			    (__instance is FVRFireArmGrip				&& BepInExPlugin.QuickGrabbing_GrabFores.Value) ||
+				(__instance is RPG7Foregrip					&& BepInExPlugin.QuickGrabbing_GrabFores.Value) ||
+				//(__instance is AttachableForegrip			&& BepInExPlugin.QuickGrabbing_GrabFores.Value) ||
+				(__instance is FVRFireArmTopCover			&& BepInExPlugin.QuickGrabbing_GrabFores.Value)) {
 				//ensure not running to prevent accidental grabbing
 				if (BepInExPlugin.QuickGrabbing_DisableWhenRunning.Value && IsArmSwinging(hand) && __instance is not FVRHandGrabPoint) return;
 				//ensure other hand is not the same item
