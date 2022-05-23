@@ -36,7 +36,8 @@ namespace PotatoesSoup
 				if (BepInExPlugin.QuickGrabbing_DisableWhenRunning.Value && IsArmSwinging(hand) && __instance is not FVRHandGrabPoint) return;
 				//ensure other hand is not the same item
 				if (__instance == hand.OtherHand.CurrentInteractable) return;
-				
+				//ensure bolt action rifle's bolt is not blocked
+				if (__instance is BoltActionRifle_Handle && ((__instance as BoltActionRifle_Handle)!).Rifle.CanBoltMove() == false) return;
 				if (hand.Input.IsGrabbing && hand.m_state == FVRViveHand.HandState.Empty)
 				{
 					if (__instance is SosigWeaponPlayerInterface)
