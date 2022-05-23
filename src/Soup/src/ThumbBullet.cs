@@ -53,6 +53,8 @@ namespace PotatoesSoup
 		[HarmonyPrefix]
 		public static bool RemoveAntonsBoltLock(ClosedBolt __instance, ref FVRViveHand hand)
 		{
+			if (BepInExPlugin.AntonBoltLock_IsEnabled.Value)
+				return true;
 			__instance.IsHeld = true;
 			__instance.m_hand = hand;
 			if (!__instance.m_hasTriggeredUpSinceBegin && __instance.m_hand.Input.TriggerFloat < 0.15f) { __instance.m_hasTriggeredUpSinceBegin = true; }
