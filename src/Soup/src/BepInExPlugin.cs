@@ -22,7 +22,7 @@ namespace PotatoesSoup
 			//EnableAccurateQBslots = Config.Bind("General Settings", "Accurate QB Slots", true, "Removes QB slot delay. Can / does cause slowdown.");
 			EasyAttaching_IsEnabled = Config.Bind(SETTING_OTHER_NAME, "Enable Easy Attaching", true, "Enables Easy Attaching");
 			BetterStabilization_IsEnabled = Config.Bind(SETTING_OTHER_NAME, "Enable Better Stabilization", true, "Allows two hand stabilization, even if other hand is holding an item.");
-			AntonBoltLock_IsEnabled = Config.Bind(SETTING_OTHER_NAME, "Enable Anton's Bolt Lock", false, "Enables Anton's bolt lock that applies to guns like the SKS and M1 Garand.");
+			AntonBoltLock_IsEnabled = Config.Bind(SETTING_OTHER_NAME, "Enable Antons Bolt Lock", false, "Enables Anton's bolt lock that applies to guns like the SKS and M1 Garand.");
 		}
 
 		//quick grabbing
