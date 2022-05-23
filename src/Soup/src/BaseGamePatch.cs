@@ -48,7 +48,7 @@ namespace PotatoesSoup
 		public static bool FVRFireArm_Awake_AddMagDump(FVRPhysicalObject __instance)
 		{
 			if (__instance.ObjectWrapper == null) return true;
-			if (__instance.ObjectWrapper.ItemID == "M1912")
+			if (__instance.ObjectWrapper.ItemID == "M1912" || __instance.ObjectWrapper.ItemID == "M1912P16")
 			{
 				var comp = __instance.gameObject.AddComponent<DumpInternalMag>();
 				comp.presstoejectbutton = H3VRUtilsMagRelease.TouchpadDirType.Left;
