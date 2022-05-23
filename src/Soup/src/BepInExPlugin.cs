@@ -74,6 +74,8 @@ namespace PotatoesSoup
 			Harmony.CreateAndPatchAll(typeof(PalmRacking));
 			Harmony.CreateAndPatchAll(typeof(QuickerClip));
 			Harmony.CreateAndPatchAll(typeof(SingleActionCCing));
+			Harmony.CreateAndPatchAll(typeof(BetterStabilization));
+			//Harmony.CreateAndPatchAll(typeof(PUNCHPATCH));
 			//Harmony.CreateAndPatchAll(typeof(BetterAkimbo));
 		}
 	}
