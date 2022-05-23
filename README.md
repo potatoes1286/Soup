@@ -42,3 +42,5 @@ Full list of additions/changes
 - Revolver ejector can now be slapped (swipe hand over, similar to MP5 handle) to eject rounds
 ##### Single Action Counter-Clockwise Rotation
 - Single action revolver cylinders can be rotated counter-clockwise with up on the touchpad
+##### Better Stabilization
+- Two-hand stabilization now works even when holding another item in the other hand
