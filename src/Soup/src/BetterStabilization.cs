@@ -11,6 +11,8 @@ namespace PotatoesSoup
 		[HarmonyPrefix]
 		public static bool FVRFireArm_IsTwoHandStabilized_Patch(FVRFireArm __instance, ref bool __result)
 		{
+			if (!BepInExPlugin.BetterStabilization_IsEnabled.Value)
+				return true;
 			__result = false;
 			if (__instance.m_hand != null && __instance.m_hand.OtherHand != null)
 			{

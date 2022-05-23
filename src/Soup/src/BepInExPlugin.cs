@@ -15,10 +15,12 @@ namespace PotatoesSoup
 		public const  string            SETTING_OTHER_NAME = "Other";
 		public static ConfigEntry<bool> EasyAttaching_IsEnabled;
 		public static ConfigEntry<bool> AccurateQBSlots_IsEnabled;
+		public static ConfigEntry<bool> BetterStabilization_IsEnabled;
 		private void SetConfig_Other()
 		{
 			//EnableAccurateQBslots = Config.Bind("General Settings", "Accurate QB Slots", true, "Removes QB slot delay. Can / does cause slowdown.");
 			EasyAttaching_IsEnabled = Config.Bind(SETTING_OTHER_NAME, "Enable Easy Attaching", true, "Enables Easy Attaching");
+			BetterStabilization_IsEnabled = Config.Bind(SETTING_OTHER_NAME, "Enable Better Stabilization", true, "Allows two hand stabilization, even if other hand is holding an item.");
 		}
 
 		//quick grabbing
@@ -28,6 +30,10 @@ namespace PotatoesSoup
 		public static ConfigEntry<bool> QuickGrabbing_RegrabBolt;
 		public static ConfigEntry<bool> QuickGrabbing_GrabFores;
 		public static ConfigEntry<bool> QuickGrabbing_GrabPistolSlides;
+		public static ConfigEntry<bool> QuickGrabbing_GrabRopes;
+		public static ConfigEntry<bool> QuickGrabbing_GrabBolts;
+		public static ConfigEntry<bool> QuickGrabbing_GrabGrenade;
+		public static ConfigEntry<bool> QuickGrabbing_GrabSosigWeapon;
 		private void SetConfig_QuickGrabbing()
 		{
 			QuickGrabbing_IsEnabled = Config.Bind(SETTING_QG_NAME, "Is Enabled", true, "Enables Quick Grabbing");
@@ -35,6 +41,10 @@ namespace PotatoesSoup
 			QuickGrabbing_RegrabBolt = Config.Bind(SETTING_QG_NAME, "Enable Re-grabbing Gun When Quick Grabbing Bolt (Bolt Action Only)", false, "When true, if you close the bolt on a bolt action after quick-grabbing it, you will automatically regrab the gun.");
 			QuickGrabbing_GrabFores = Config.Bind(SETTING_QG_NAME, "Enable Grabbing Foregrips", false, "Allows Quick Grabbing to apply to foregrips");
 			QuickGrabbing_GrabPistolSlides = Config.Bind(SETTING_QG_NAME, "Enable Grabbing Pistol Slides", true, "Allows Quick Grabbing to apply to pistol slides");
+			QuickGrabbing_GrabRopes = Config.Bind(SETTING_QG_NAME, "Enable Grabbing Ropes", true, "Allows Quick Grabbing to apply to ropes");
+			QuickGrabbing_GrabBolts = Config.Bind(SETTING_QG_NAME, "Enable Grabbing Weapon Bolts", true, "Allows Quick Grabbing to apply to weapon bolts/handles");
+			QuickGrabbing_GrabGrenade = Config.Bind(SETTING_QG_NAME, "Enable Grabbing Grenades", true, "Allows Quick Grabbing to apply to grenades");
+			QuickGrabbing_GrabSosigWeapon = Config.Bind(SETTING_QG_NAME, "Enable Grabbing Sosig guns", true, "Allows Quick Grabbing to apply to sosig guns");
 		}
 		
 		//clear stab
