@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
 using FistVR;
@@ -9,7 +10,8 @@ namespace PotatoesSoup
 {
 	public class ThumbBullet : MonoBehaviour
 	{
-		[HarmonyPatch(typeof(FVRFireArmChamber), "EjectRound")]
+		[HarmonyPatch(typeof(FVRFireArmChamber), nameof(FVRFireArmChamber.EjectRound), new Type[] {typeof(Vector3), typeof(Vector3), typeof(Vector3), typeof(bool)})]
+		[HarmonyPatch(typeof(FVRFireArmChamber), nameof(FVRFireArmChamber.EjectRound), new Type[] {typeof(Vector3), typeof(Vector3), typeof(Vector3), typeof(Vector3), typeof(Quaternion), typeof(bool)})]
 		[HarmonyPostfix]
 		public static void ThumbBullet_Chamber_Patch(FVRFireArmChamber __instance, ref FVRFireArmRound __result)
 		{
