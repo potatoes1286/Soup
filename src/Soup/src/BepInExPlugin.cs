@@ -1,6 +1,8 @@
-﻿using BepInEx;
+﻿using System;
+using BepInEx;
 using BepInEx.Configuration;
 using HarmonyLib;
+using UnityEngine;
 
 namespace PotatoesSoup
 {
@@ -17,12 +19,14 @@ namespace PotatoesSoup
 		public static ConfigEntry<bool> AccurateQBSlots_IsEnabled;
 		public static ConfigEntry<bool> BetterStabilization_IsEnabled;
 		public static ConfigEntry<bool> AntonBoltLock_IsEnabled;
+		public static ConfigEntry<bool> VerboseLogging_IsEnabled;
 		private void SetConfig_Other()
 		{
 			//EnableAccurateQBslots = Config.Bind("General Settings", "Accurate QB Slots", true, "Removes QB slot delay. Can / does cause slowdown.");
 			EasyAttaching_IsEnabled = Config.Bind(SETTING_OTHER_NAME, "Enable Easy Attaching", true, "Enables Easy Attaching");
 			BetterStabilization_IsEnabled = Config.Bind(SETTING_OTHER_NAME, "Enable Better Stabilization", true, "Allows two hand stabilization, even if other hand is holding an item.");
 			AntonBoltLock_IsEnabled = Config.Bind(SETTING_OTHER_NAME, "Enable Antons Bolt Lock", false, "Enables Anton's bolt lock that applies to guns like the SKS and M1 Garand.");
+			VerboseLogging_IsEnabled = Config.Bind(SETTING_OTHER_NAME, "Enable Verbose Logging", false, "Add more spam to your console for debugging.");
 		}
 
 		//quick grabbing
@@ -72,23 +76,30 @@ namespace PotatoesSoup
 		public void Start()
 		{
 			SetConfigs();
-			Harmony.CreateAndPatchAll(typeof(DecockingRevolver));
-			Harmony.CreateAndPatchAll(typeof(BaseGamePatch));
-			Harmony.CreateAndPatchAll(typeof(BoltBrace));
-			Harmony.CreateAndPatchAll(typeof(BoltBrace_PlayerHeadLock));
-			Harmony.CreateAndPatchAll(typeof(ThumbBullet));
-			//Harmony.CreateAndPatchAll(typeof(BetterQBslots));
-			Harmony.CreateAndPatchAll(typeof(BoltActionRifleDecocking));
-			Harmony.CreateAndPatchAll(typeof(ClearStabilization));
-			Harmony.CreateAndPatchAll(typeof(BetterPanels));
-			Harmony.CreateAndPatchAll(typeof(EasyAttaching));
-			Harmony.CreateAndPatchAll(typeof(ExtractorHit));
-			Harmony.CreateAndPatchAll(typeof(PalmRacking));
-			Harmony.CreateAndPatchAll(typeof(QuickerClip));
-			Harmony.CreateAndPatchAll(typeof(SingleActionCCing));
-			Harmony.CreateAndPatchAll(typeof(BetterStabilization));
-			//Harmony.CreateAndPatchAll(typeof(PUNCHPATCH));
-			//Harmony.CreateAndPatchAll(typeof(BetterAkimbo));
+			LogAndPatch(typeof(DecockingRevolver));
+			LogAndPatch(typeof(BaseGamePatch));
+			LogAndPatch(typeof(BoltBrace));
+			LogAndPatch(typeof(BoltBrace_PlayerHeadLock));
+			LogAndPatch(typeof(ThumbBullet));
+			//LogAndPatch(typeof(BetterQBslots));
+			LogAndPatch(typeof(BoltActionRifleDecocking));
+			LogAndPatch(typeof(ClearStabilization));
+			LogAndPatch(typeof(BetterPanels));
+			LogAndPatch(typeof(EasyAttaching));
+			LogAndPatch(typeof(ExtractorHit));
+			LogAndPatch(typeof(PalmRacking));
+			LogAndPatch(typeof(QuickerClip));
+			LogAndPatch(typeof(SingleActionCCing));
+			LogAndPatch(typeof(BetterStabilization));
+			//LogAndPatch(typeof(PUNCHPATCH));
+			//LogAndPatch(typeof(BetterAkimbo));
+		}
+
+		public void LogAndPatch(Type type)
+		{
+			if(VerboseLogging_IsEnabled.Value)
+				Debug.Log($"V-Soup: Patching {type.FullName}!");
+			Harmony.CreateAndPatchAll(type);
 		}
 	}
 	
