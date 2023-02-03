@@ -107,6 +107,6 @@ namespace PotatoesSoup
 	{
 		internal const string NAME = "Potatoes' Soup";
 		internal const string GUID = "dll.potatoes1286.soup";
-		internal const string VERSION = "5.0.0"; 
+		internal const string VERSION = "5.0.2"; 
 	}
 }
