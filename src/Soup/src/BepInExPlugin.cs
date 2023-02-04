@@ -20,6 +20,7 @@ namespace PotatoesSoup
 		public static ConfigEntry<bool> BetterStabilization_IsEnabled;
 		public static ConfigEntry<bool> AntonBoltLock_IsEnabled;
 		public static ConfigEntry<bool> VerboseLogging_IsEnabled;
+		public static ConfigEntry<bool> Akimbo_IsEnabled;
 		public static ConfigEntry<bool> AkimboOneHand_IsEnabled;
 		private void SetConfig_Other()
 		{
@@ -29,6 +30,7 @@ namespace PotatoesSoup
 			AntonBoltLock_IsEnabled = Config.Bind(SETTING_OTHER_NAME, "Enable Antons Bolt Lock", false, "Enables Anton's bolt lock that applies to guns like the SKS and M1 Garand.");
 			AkimboOneHand_IsEnabled = base.Config.Bind<bool>("Other", "Enable Akimbo Reloading With One Handgun", false, "Enables Akimbo-style reloading even if you only are holding one handgun");
 			VerboseLogging_IsEnabled = Config.Bind(SETTING_OTHER_NAME, "Enable Verbose Logging", false, "Add more spam to your console for debugging.");
+			Akimbo_IsEnabled = base.Config.Bind<bool>("Other", "Enable Akimbo", true, "Enables Akimbo-style reloading.");
 		}
 
 		//quick grabbing
