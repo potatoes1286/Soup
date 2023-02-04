@@ -17,8 +17,8 @@
     </ItemGroup>
     
     <ItemGroup>
-      <Reference Include="Assembly-CSharp.H3VRUtilities.mm, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-        <HintPath>..\..\..\..\H3VR\H3VR\profiles\Testing\BepInEx\plugins\WFIOST-H3VRUtilities\Assembly-CSharp.H3VRUtilities.mm.dll</HintPath>
+      <Reference Include="Assembly-CSharp.H3VRUtilities.mm">
+        <HintPath>..\libs\Assembly-CSharp.H3VRUtilities.mm.dll</HintPath>
       </Reference>
     </ItemGroup>
 

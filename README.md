@@ -42,3 +42,9 @@ Full list of additions/changes
 - Revolver ejector can now be slapped (swipe hand over, similar to MP5 handle) to eject rounds
 ##### Single Action Counter-Clockwise Rotation
 - Single action revolver cylinders can be rotated counter-clockwise with up on the touchpad
+##### Better Stabilization
+- Two-hand stabilization now works even when holding another item in the other hand
+
+## Building
+
+Download or build [H3VRUtilities](https://github.com/WFIOST/H3VRUtilities) and insert `/monomod/Assembly-CSharp.H3VRUtilities.mm.dll` from H3VRUtilities to `/src/libs` in your Soup project. The rest of the dependencies should be handled by NuGet.

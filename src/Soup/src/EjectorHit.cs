@@ -24,10 +24,11 @@ namespace PotatoesSoup
 					float magnitude = otherHand.Input.VelLinearWorld.magnitude;
 					if (magnitude > 1f)
 					{
+						__instance.ELerp = 1f;
 						if (__instance.Ejector != null)
-						{
 							__instance.Ejector.localPosition = __instance.RearPos;
-						}
+						if (__instance.Ejector2 != null)
+							__instance.Ejector2.localPosition = __instance.RearPos2;
 						__instance.Magnum.EjectChambers();
 					}
 				}
