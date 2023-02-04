@@ -94,7 +94,7 @@ namespace PotatoesSoup
 			LogAndPatch(typeof(SingleActionCCing));
 			LogAndPatch(typeof(BetterStabilization));
 			//LogAndPatch(typeof(PUNCHPATCH));
-			//LogAndPatch(typeof(BetterAkimbo));
+			LogAndPatch(typeof(Akimbo));
 		}
 
 		public void LogAndPatch(Type type)
