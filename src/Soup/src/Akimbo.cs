@@ -9,11 +9,11 @@ namespace PotatoesSoup {
 		[HarmonyPatch(typeof(Handgun), "UpdateInteraction")]
 		[HarmonyPrefix]
 		public static bool Handgun_UpdateInteraction_AkimboReloading(Handgun __instance, ref FVRViveHand hand) {
-			if (BepInExPlugin.Akimbo_IsEnabled.Value || __instance.Magazine != null)
+			if (!BepInExPlugin.Akimbo_IsEnabled.Value || __instance.Magazine != null)
 				return true;
 			FVRQuickBeltSlot qbslot = null;
 			for (int i = 0; i < GM.CurrentPlayerBody.QBSlots_Internal.Count; i++) {
-				if (GM.CurrentPlayerBody.QBSlots_Internal[i].IsPointInsideMe(hand.PoseOverride.position)) {
+				if (GM.CurrentPlayerBody.QBSlots_Internal[i].IsPointInsideMe(__instance.ReloadTriggerWell.transform.position)) {
 					qbslot = GM.CurrentPlayerBody.QBSlots_Internal[i];
 					break;
 				}
