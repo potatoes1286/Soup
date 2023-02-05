@@ -12,8 +12,15 @@ namespace PotatoesSoup {
 			if (!BepInExPlugin.Akimbo_IsEnabled.Value || __instance.Magazine != null)
 				return true;
 			FVRQuickBeltSlot qbslot = null;
+			Transform t;
+			
+			if (__instance.ReloadTriggerWell == null)
+				t = hand.PoseOverride.transform;
+			else
+				t = __instance.ReloadTriggerWell.transform;
+			
 			for (int i = 0; i < GM.CurrentPlayerBody.QBSlots_Internal.Count; i++) {
-				if (GM.CurrentPlayerBody.QBSlots_Internal[i].IsPointInsideMe(__instance.ReloadTriggerWell.transform.position)) {
+				if (GM.CurrentPlayerBody.QBSlots_Internal[i].IsPointInsideMe(t.position)) {
 					qbslot = GM.CurrentPlayerBody.QBSlots_Internal[i];
 					break;
 				}
