@@ -44,6 +44,10 @@ Full list of additions/changes
 - Single action revolver cylinders can be rotated counter-clockwise with up on the touchpad
 ##### Better Stabilization
 - Two-hand stabilization now works even when holding another item in the other hand
+##### Akimbo Reloading
+- If you are holding two pistols in your hands, you can simply hover them over magazines in your quickbelt to automatically load them!
+- Can be enabled/disabled in config
+- This reloading style can be enabled when only holding one handgun in the config (off by default)
 
 ## Building
 
