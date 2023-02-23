@@ -127,5 +127,20 @@ namespace PotatoesSoup
 			}
 			return true;
 		}
+		
+		//When kinematic locked, lack of physics bugginess makes it harder to kick.
+		//This makes latch much more sensitive so it can kick out properly.
+		[HarmonyPatch(typeof(PhysicalMagazineReleaseLatch), "FixedUpdate")]
+		[HarmonyPostfix]
+		public static void BoltBrace_PhysicalMagazineReleaseLatch_FixKick(PhysicalMagazineReleaseLatch __instance)
+		{
+			if (__instance.FireArm.IsKinematicLocked == true)
+			{
+				if (__instance.FireArm.Magazine != null && __instance.timeSinceLastCollision < 0.03f && __instance.Joint.angle < __instance.Threshold * 0.25f)
+				{
+					__instance.FireArm.EjectMag(true);
+				}
+			}
+		}
 	}
 }
