@@ -36,18 +36,30 @@ namespace PotatoesSoup {
 
 			if (BepInExPlugin.AkimboOneHand_IsEnabled.Value ||
 			    (hand.OtherHand.CurrentInteractable != null && hand.OtherHand.CurrentInteractable is Handgun)) {
-				FVRFireArmMagazine nmag;
+				FVRFireArmMagazine newMag;
 				if (mag.m_isSpawnLock) {
-					nmag = UnityEngine.Object
+					newMag = UnityEngine.Object
 					   .Instantiate<GameObject>(mag.ObjectWrapper.GetGameObject(), mag.Transform.position,
 					                            mag.Transform.rotation).GetComponent<FVRFireArmMagazine>();
+					for (int i = 0; i < Mathf.Min(mag.LoadedRounds.Length, newMag.LoadedRounds.Length); i++)
+					{
+						if (mag.LoadedRounds[i] != null && mag.LoadedRounds[i].LR_Mesh != null)
+						{
+							newMag.LoadedRounds[i].LR_Class = mag.LoadedRounds[i].LR_Class;
+							newMag.LoadedRounds[i].LR_Mesh = mag.LoadedRounds[i].LR_Mesh;
+							newMag.LoadedRounds[i].LR_Material = mag.LoadedRounds[i].LR_Material;
+							newMag.LoadedRounds[i].LR_ObjectWrapper = mag.LoadedRounds[i].LR_ObjectWrapper;
+						}
+					}
+					newMag.m_numRounds = mag.m_numRounds;
+					newMag.UpdateBulletDisplay();
 				}
 				else {
-					nmag = mag;
+					newMag = mag;
 					mag.ClearQuickbeltState();
 				}
 
-				nmag.Load(__instance);
+				newMag.Load(__instance);
 			}
 
 			return true;
