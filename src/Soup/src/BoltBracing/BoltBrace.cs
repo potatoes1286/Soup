@@ -17,7 +17,8 @@ namespace PotatoesSoup
 				//is not braced- braced
 				if    (!__instance.IsHeld
 				    && !__instance.IsAltHeld
-				    && __instance.Bolt.CurPos == ClosedBolt.BoltPos.Rear
+				    && (__instance.Bolt.CurPos == ClosedBolt.BoltPos.Rear
+				    || __instance.Bolt.CurPos == ClosedBolt.BoltPos.Locked)
 				    && __instance.Bolt.IsHeld
 					&& !__instance.IsKinematicLocked)
 				{
