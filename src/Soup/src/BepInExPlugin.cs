@@ -79,6 +79,7 @@ namespace PotatoesSoup
 			SetConfig_Other();
 			SetConfig_QuickGrabbing();
 			SetConfig_ClearStab();
+			SetConfig_Questionable();
 		}
 		#endregion
 		

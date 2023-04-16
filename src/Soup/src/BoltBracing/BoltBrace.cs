@@ -18,7 +18,7 @@ namespace PotatoesSoup
 				if    (!__instance.IsHeld
 				    && !__instance.IsAltHeld
 				    && (__instance.Bolt.CurPos == ClosedBolt.BoltPos.Rear
-				    || __instance.Bolt.CurPos == ClosedBolt.BoltPos.Locked)
+				    || (__instance.Bolt.UsesAKSafetyLock && Mathf.Abs(__instance.Bolt.m_boltZ_current - __instance.Bolt.m_boltZ_safetylock) < 0.001f)) //horrid
 				    && __instance.Bolt.IsHeld
 					&& !__instance.IsKinematicLocked)
 				{
@@ -33,7 +33,7 @@ namespace PotatoesSoup
 			else
 			{
 				//is braced- unbrace
-				if (__instance.IsHeld || __instance.IsAltHeld || __instance.Bolt.CurPos != ClosedBolt.BoltPos.Rear || !__instance.Bolt.IsHeld)
+				if (__instance.IsHeld || __instance.IsAltHeld || (__instance.Bolt.CurPos != ClosedBolt.BoltPos.Rear && !(__instance.Bolt.UsesAKSafetyLock && Mathf.Abs(__instance.Bolt.m_boltZ_current - __instance.Bolt.m_boltZ_safetylock) < 0.001f)) || !__instance.Bolt.IsHeld)
 				{
 					__instance.transform.parent = null;
 					__instance.SetIsKinematicLocked(false);
