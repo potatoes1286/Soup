@@ -92,7 +92,7 @@ namespace PotatoesSoup
 			LogAndPatch(typeof(EasyAttaching));
 			LogAndPatch(typeof(ExtractorHit));
 			LogAndPatch(typeof(PalmRacking));
-			LogAndPatch(typeof(QuickerClip));
+			//LogAndPatch(typeof(QuickerClip)); //i dont know what this patch does. i forgor
 			LogAndPatch(typeof(SingleActionCCing));
 			LogAndPatch(typeof(BetterStabilization));
 			//LogAndPatch(typeof(PUNCHPATCH));
