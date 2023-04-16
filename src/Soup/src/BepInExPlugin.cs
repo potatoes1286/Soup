@@ -21,16 +21,14 @@ namespace PotatoesSoup
 		public static ConfigEntry<bool> AntonBoltLock_IsEnabled;
 		public static ConfigEntry<bool> VerboseLogging_IsEnabled;
 		public static ConfigEntry<bool> Akimbo_IsEnabled;
-		public static ConfigEntry<bool> AkimboOneHand_IsEnabled;
 		private void SetConfig_Other()
 		{
 			//EnableAccurateQBslots = Config.Bind("General Settings", "Accurate QB Slots", true, "Removes QB slot delay. Can / does cause slowdown.");
 			EasyAttaching_IsEnabled = Config.Bind(SETTING_OTHER_NAME, "Enable Easy Attaching", true, "Enables Easy Attaching");
 			BetterStabilization_IsEnabled = Config.Bind(SETTING_OTHER_NAME, "Enable Better Stabilization", true, "Allows two hand stabilization, even if other hand is holding an item.");
 			AntonBoltLock_IsEnabled = Config.Bind(SETTING_OTHER_NAME, "Enable Antons Bolt Lock", false, "Enables Anton's bolt lock that applies to guns like the SKS and M1 Garand.");
-			AkimboOneHand_IsEnabled = base.Config.Bind<bool>("Other", "Enable Akimbo Reloading With One Handgun", false, "Enables Akimbo-style reloading even if you only are holding one handgun");
 			VerboseLogging_IsEnabled = Config.Bind(SETTING_OTHER_NAME, "Enable Verbose Logging", false, "Add more spam to your console for debugging.");
-			Akimbo_IsEnabled = base.Config.Bind<bool>("Other", "Enable Akimbo", true, "Enables Akimbo-style reloading.");
+			Akimbo_IsEnabled = base.Config.Bind<bool>(SETTING_OTHER_NAME, "Enable Akimbo", true, "Enables Akimbo-style reloading.");
 		}
 
 		//quick grabbing
@@ -56,7 +54,16 @@ namespace PotatoesSoup
 			QuickGrabbing_GrabGrenade = Config.Bind(SETTING_QG_NAME, "Enable Grabbing Grenades", true, "Allows Quick Grabbing to apply to grenades");
 			QuickGrabbing_GrabSosigWeapon = Config.Bind(SETTING_QG_NAME, "Enable Grabbing Sosig guns", true, "Allows Quick Grabbing to apply to sosig guns");
 		}
-		
+		public const  string            SETTING_QUESTIONABLE_NAME = "Questionable Settings";
+		public static ConfigEntry<bool> AkimboOneHand_IsEnabled;
+		public static ConfigEntry<bool> AkimboAllWeapons_IsEnabled;
+		private void SetConfig_Questionable()
+		{
+			AkimboOneHand_IsEnabled = base.Config.Bind<bool>(SETTING_QUESTIONABLE_NAME, "Enable Akimbo When Second Hand Free", false, "Enables Akimbo-style reloading even if your second hand is unoccupied");
+			AkimboAllWeapons_IsEnabled = base.Config.Bind<bool>(SETTING_QUESTIONABLE_NAME, "Enable Akimbo Reloading With All Weapons", false, "Enables Akimbo-style reloading even if you only are holding what definitely is NOT a pistol.");
+		}
+
+
 		//clear stab
 		public const  string             SETTING_CS_NAME = "Clear Stabilization";
 		public static ConfigEntry<bool>  ClearStab_IsEnabled;
