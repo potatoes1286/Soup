@@ -32,6 +32,16 @@ namespace PotatoesSoup
 				(__instance is RPG7Foregrip					&& BepInExPlugin.QuickGrabbing_GrabFores.Value) ||
 			 //(__instance is AttachableForegrip			&& BepInExPlugin.QuickGrabbing_GrabFores.Value) ||
 			   (__instance is FVRFireArmTopCover			&& BepInExPlugin.QuickGrabbing_GrabFores.Value)) {
+				
+				//when you grab fvraltgrip it redirects the hand to PrimaryObject
+				//So fvraltgrip is never actually held
+				//and quickgrab thinks that you can grab it when you shouldnt be able to
+				//this fixes that, by checking the primary object's isheld instead of fvraltgrip's
+				if (__instance is FVRAlternateGrip grip) {
+					if (grip.PrimaryObject.IsAltHeld)
+						return;
+				}
+				
 				//ensure not running to prevent accidental grabbing
 				if (BepInExPlugin.QuickGrabbing_DisableWhenRunning.Value && IsArmSwinging(hand) && __instance is not FVRHandGrabPoint) return;
 				//ensure other hand is not the same item
@@ -47,8 +57,10 @@ namespace PotatoesSoup
 						var bolt = __instance as BoltActionRifle_Handle;
 						bolt.m_wasTPInitiated = true;
 					}
-					__instance.BeginInteraction(hand);
+					
+					hand.Buzz(hand.Buzzer.Buzz_BeginInteraction);
 					hand.ForceSetInteractable(__instance);
+					__instance.BeginInteraction(hand);
 				}
 			}
 		}
