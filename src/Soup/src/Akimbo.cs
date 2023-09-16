@@ -206,6 +206,10 @@ namespace PotatoesSoup {
 			if (qbslot == null || qbslot.CurObject == null || !(qbslot.CurObject is Speedloader speedLoader) || !__instance.Cylinder.CanAccept() || isRevolverFull)
 				return true;
 
+			//im sure this wont null throw
+			if (speedLoader.Chambers[0].Type != __instance.RoundType)
+				return true;
+
 			if (BepInExPlugin.AkimboOneHand_IsEnabled.Value || hand.OtherHand.CurrentInteractable != null) {
 				Speedloader newSL;
 				if (speedLoader.m_isSpawnLock) {

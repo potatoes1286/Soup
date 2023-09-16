@@ -39,12 +39,14 @@ namespace PotatoesSoup
 				//So fvraltgrip is never actually held
 				//and quickgrab thinks that you can grab it when you shouldnt be able to
 				//this fixes that, by checking the primary object's isheld instead of fvraltgrip's
-				if (__instance is FVRAlternateGrip grip) {
+				if (__instance is FVRAlternateGrip grip)
 					if (grip.PrimaryObject.IsAltHeld)
 						return;
-				}
-				
-				//ensure not running to prevent accidental grabbing
+				if(__instance is FVRFireArmMagazine mag)
+					if (mag.State == FVRFireArmMagazine.MagazineState.Locked)
+						return;
+
+					//ensure not running to prevent accidental grabbing
 				if (BepInExPlugin.QuickGrabbing_DisableWhenRunning.Value && IsArmSwinging(hand) && __instance is not FVRHandGrabPoint) return;
 				//ensure other hand is not the same item
 				if (__instance == hand.OtherHand.CurrentInteractable) return;
