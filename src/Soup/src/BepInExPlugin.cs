@@ -40,6 +40,7 @@ namespace PotatoesSoup
 		public static ConfigEntry<bool> QuickGrabbing_GrabPistolSlides;
 		public static ConfigEntry<bool> QuickGrabbing_GrabRopes;
 		public static ConfigEntry<bool> QuickGrabbing_GrabBolts;
+		public static ConfigEntry<bool> QuickGrabbing_GrabMags;
 		public static ConfigEntry<bool> QuickGrabbing_GrabGrenade;
 		public static ConfigEntry<bool> QuickGrabbing_GrabSosigWeapon;
 		private void SetConfig_QuickGrabbing()
@@ -51,6 +52,7 @@ namespace PotatoesSoup
 			QuickGrabbing_GrabPistolSlides = Config.Bind(SETTING_QG_NAME, "Enable Grabbing Pistol Slides", true, "Allows Quick Grabbing to apply to pistol slides");
 			QuickGrabbing_GrabRopes = Config.Bind(SETTING_QG_NAME, "Enable Grabbing Ropes", true, "Allows Quick Grabbing to apply to ropes");
 			QuickGrabbing_GrabBolts = Config.Bind(SETTING_QG_NAME, "Enable Grabbing Weapon Bolts", true, "Allows Quick Grabbing to apply to weapon bolts/handles");
+			QuickGrabbing_GrabMags = Config.Bind(SETTING_QG_NAME, "Enable Grabbing Magazines and Speedloaders", true, "Allows Quick Grabbing to apply to weapon mags/speedloaders");
 			QuickGrabbing_GrabGrenade = Config.Bind(SETTING_QG_NAME, "Enable Grabbing Grenades", true, "Allows Quick Grabbing to apply to grenades");
 			QuickGrabbing_GrabSosigWeapon = Config.Bind(SETTING_QG_NAME, "Enable Grabbing Sosig guns", true, "Allows Quick Grabbing to apply to sosig guns");
 		}

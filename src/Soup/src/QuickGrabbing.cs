@@ -21,6 +21,8 @@ namespace PotatoesSoup
 			    (__instance is OpenBoltChargingHandle		&& BepInExPlugin.QuickGrabbing_GrabBolts.Value) ||
 			    (__instance is BoltActionRifle_Handle		&& BepInExPlugin.QuickGrabbing_GrabBolts.Value) ||
 			    (__instance is TubeFedShotgunBolt			&& BepInExPlugin.QuickGrabbing_GrabBolts.Value) ||
+			    (__instance is FVRFireArmMagazine			&& BepInExPlugin.QuickGrabbing_GrabMags.Value) ||
+			    (__instance is Speedloader					&& BepInExPlugin.QuickGrabbing_GrabMags.Value) ||
 				(__instance is HandgunSlide					&& BepInExPlugin.QuickGrabbing_GrabPistolSlides.Value) ||
 			    (__instance is FVRHandGrabPoint				&& BepInExPlugin.QuickGrabbing_GrabRopes.Value) ||
 			    (__instance is PinnedGrenade				&& BepInExPlugin.QuickGrabbing_GrabGrenade.Value) ||
