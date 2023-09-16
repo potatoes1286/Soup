@@ -101,7 +101,7 @@ namespace PotatoesSoup
 			LogAndPatch(typeof(BetterPanels));
 			LogAndPatch(typeof(EasyAttaching));
 			LogAndPatch(typeof(ExtractorHit));
-			LogAndPatch(typeof(PalmRacking));
+			LogAndPatch(typeof(QuickGrabbing));
 			//LogAndPatch(typeof(QuickerClip)); //i dont know what this patch does. i forgor
 			LogAndPatch(typeof(SingleActionCCing));
 			LogAndPatch(typeof(BetterStabilization));

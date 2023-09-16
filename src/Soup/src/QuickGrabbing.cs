@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace PotatoesSoup
 {
-	public class PalmRacking : MonoBehaviour
+	public class QuickGrabbing : MonoBehaviour
 	{
 		[HarmonyPatch(typeof(FVRInteractiveObject), "Poke")]
 		[HarmonyPostfix]
-		public static void PalmRacking_Patch(FVRInteractiveObject __instance, ref FVRViveHand hand)
+		public static void QuickGrabbingPatch(FVRInteractiveObject __instance, ref FVRViveHand hand)
 		{
 			if (!BepInExPlugin.QuickGrabbing_IsEnabled.Value) return;
 			if (hand.m_currentHoveredQuickbeltSlot != null) return;
