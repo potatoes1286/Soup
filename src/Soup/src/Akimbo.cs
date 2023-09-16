@@ -86,15 +86,12 @@ namespace PotatoesSoup {
 					break;
 				}
 			}
-
 			if (qbslot == null || qbslot.CurObject == null || !(qbslot.CurObject is FVRFireArmMagazine))
 				return true;
-
 			FVRFireArmMagazine mag = qbslot.CurObject as FVRFireArmMagazine;
 
 			if (mag.MagazineType != __instance.MagazineType)
 				return true;
-
 			if (BepInExPlugin.AkimboOneHand_IsEnabled.Value || hand.OtherHand.CurrentInteractable != null) {
 				FVRFireArmMagazine newMag;
 				if (mag.m_isSpawnLock) {
@@ -175,6 +172,60 @@ namespace PotatoesSoup {
 				}
 
 				newMag.Load(__instance);
+			}
+
+			return true;
+		}
+		
+		
+		//this one isn't dry
+		//TODO: do this
+		[HarmonyPatch(typeof(Revolver), "UpdateInteraction")]
+		[HarmonyPrefix]
+		public static bool Revolver_UpdateInteraction_AkimboReloading(Revolver __instance, ref FVRViveHand hand) {
+			if (!BepInExPlugin.Akimbo_IsEnabled.Value || __instance.isCylinderArmLocked)
+				return true;
+			FVRQuickBeltSlot qbslot = null;
+			var RevolverCylinder = __instance.Cylinder;
+			
+			for (int i = 0; i < GM.CurrentPlayerBody.QBSlots_Internal.Count; i++) {
+				if (GM.CurrentPlayerBody.QBSlots_Internal[i].IsPointInsideMe(RevolverCylinder.transform.position)) {
+					qbslot = GM.CurrentPlayerBody.QBSlots_Internal[i];
+					break;
+				}
+			}
+
+			bool isRevolverFull = true;
+			foreach (var chamber in __instance.Chambers) {
+				if (!chamber.IsFull) {
+					isRevolverFull = false;
+					break;
+				}
+			}
+
+			if (qbslot == null || qbslot.CurObject == null || !(qbslot.CurObject is Speedloader speedLoader) || !__instance.Cylinder.CanAccept() || isRevolverFull)
+				return true;
+
+			if (BepInExPlugin.AkimboOneHand_IsEnabled.Value || hand.OtherHand.CurrentInteractable != null) {
+				Speedloader newSL;
+				if (speedLoader.m_isSpawnLock) {
+					GameObject gameObject = UnityEngine.Object.Instantiate<GameObject>(speedLoader.ObjectWrapper.GetGameObject(), speedLoader.Transform.position, speedLoader.Transform.rotation);
+					newSL = gameObject.GetComponent<Speedloader>();
+					for (int i = 0; i < speedLoader.Chambers.Count; i++)
+					{
+						if (speedLoader.Chambers[i].IsLoaded)
+							newSL.Chambers[i].Load(speedLoader.Chambers[i].LoadedClass, false);
+						else
+							newSL.Chambers[i].Unload();
+					}
+				}
+				else {
+					newSL = speedLoader;
+					speedLoader.ClearQuickbeltState();
+				}
+				__instance.Cylinder.LoadFromSpeedLoader(newSL);
+				if(newSL.InjectsOnInsertion)
+					UnityEngine.Object.Destroy(newSL.gameObject);
 			}
 
 			return true;
