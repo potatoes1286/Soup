@@ -58,6 +58,40 @@ namespace PotatoesSoup
 			return true;
 		}
 		
+		// AUG patch
+		// Makes dual-stage less sensitive so that you can actually single fire.
+		[HarmonyPatch(typeof(ClosedBoltWeapon), "Awake")]
+		[HarmonyPrefix]
+		public static bool ClosedBoltWeapon_Awake_LessSensitiveDualStage(ClosedBoltWeapon __instance) {
+			if (!BepInExPlugin.DualStageAlt_IsEnabled.Value)
+				return true;
+			if (__instance.ObjectWrapper == null || !__instance.UsesDualStageFullAuto) return true;
+			__instance.TriggerDualStageThreshold = 1.1f;
+
+			return true;
+		}
+		
+		[HarmonyPatch(typeof(ClosedBoltWeapon), "UpdateInputAndAnimate")]
+		[HarmonyPostfix]
+		public static void ClosedBoltWeapon_UpdateInputAndAnimate_DualStageFire(ClosedBoltWeapon __instance, ref FVRViveHand hand) {
+			if (!__instance.UsesDualStageFullAuto || !BepInExPlugin.DualStageAlt_IsEnabled.Value)
+				return;
+			ClosedBoltWeapon.FireSelectorModeType modeType = __instance.FireSelector_Modes[__instance.m_fireSelectorMode].ModeType;
+			if (modeType != ClosedBoltWeapon.FireSelectorModeType.Safe && __instance.m_hasTriggeredUpSinceBegin) {
+				if (__instance.Bolt.CurPos == ClosedBolt.BoltPos.Forward && modeType == ClosedBoltWeapon.FireSelectorModeType.FullAuto && hand.Input.TriggerPressed)
+				{
+					__instance.DropHammer();
+					__instance.m_hasTriggerReset = false;
+					if (__instance.m_CamBurst > 0)
+					{
+						__instance.m_CamBurst--;
+					}
+				}
+			}
+		}
+		
+
+
 		// Bouncy bullets!
 		[HarmonyPatch(typeof(FVRFireArmRound), "Awake")]
 		[HarmonyPatch(typeof(FVRFireArmRound), "Fire")]
