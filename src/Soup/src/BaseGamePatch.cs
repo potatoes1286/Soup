@@ -57,5 +57,16 @@ namespace PotatoesSoup
 
 			return true;
 		}
+		
+		// Bouncy bullets!
+		[HarmonyPatch(typeof(FVRFireArmRound), "Awake")]
+		[HarmonyPatch(typeof(FVRFireArmRound), "Fire")]
+		[HarmonyPostfix]
+		public static void FVRFireArmRound_Awake_Bounce(FVRFireArmRound __instance) {
+			if (__instance.m_isSpent && BepInExPlugin.BulletBounce_IsEnabled.Value)
+				foreach (Collider component in __instance.GetComponentsInChildren<Collider>())
+					if (!component.isTrigger)
+						component.material = BepInExPlugin.Bounce;
+		}
 	}
 }

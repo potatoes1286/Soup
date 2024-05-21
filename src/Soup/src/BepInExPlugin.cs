@@ -96,8 +96,8 @@ namespace PotatoesSoup
 			SetConfig_Questionable();
 		}
 		#endregion
-		
-		
+
+		public static PhysicMaterial Bounce = new PhysicMaterial();
 		
 		public void Start()
 		{
@@ -119,6 +119,10 @@ namespace PotatoesSoup
 			LogAndPatch(typeof(BetterStabilization));
 			//LogAndPatch(typeof(PUNCHPATCH));
 			LogAndPatch(typeof(Akimbo));
+			
+			// Set up bounce material
+			Bounce.bounciness = BulletBounce_Bounciness.Value;
+			Bounce.bounceCombine = PhysicMaterialCombine.Maximum;
 		}
 
 		public void LogAndPatch(Type type)
