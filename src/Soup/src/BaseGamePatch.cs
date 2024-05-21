@@ -90,6 +90,19 @@ namespace PotatoesSoup
 			}
 		}
 		
+		// Fix Latching for Break Action Weapons
+		[HarmonyPatch(typeof(BreakActionWeapon), "FVRFixedUpdate")]
+		[HarmonyPrefix]
+		public static bool BreakActionWeapon_FVRFixedUpdate_PrefixFixLatching(BreakActionWeapon __instance) {
+			__instance.m_latchRot *= 2;
+			return true;
+		}
+		
+		[HarmonyPatch(typeof(BreakActionWeapon), "FVRFixedUpdate")]
+		[HarmonyPostfix]
+		public static void BreakActionWeapon_FVRFixedUpdate_PostfixFixLatching(BreakActionWeapon __instance) {
+			__instance.m_latchRot *= 0.5f;
+		}
 
 
 		// Bouncy bullets!
