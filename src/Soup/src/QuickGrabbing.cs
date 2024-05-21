@@ -69,6 +69,51 @@ namespace PotatoesSoup
 			}
 		}
 
+		public static void QuickGrab(FVRInteractiveObject __instance, FVRViveHand hand) {
+			//when you grab fvraltgrip it redirects the hand to PrimaryObject
+			//So fvraltgrip is never actually held
+			//and quickgrab thinks that you can grab it when you shouldnt be able to
+			//this fixes that, by checking the primary object's isheld instead of fvraltgrip's
+			if (__instance is FVRAlternateGrip grip)
+				if (grip.PrimaryObject.IsAltHeld)
+					return;
+			if(__instance is FVRFireArmMagazine mag)
+				if (mag.State == FVRFireArmMagazine.MagazineState.Locked)
+					return;
+
+			//ensure not running to prevent accidental grabbing
+			if (BepInExPlugin.QuickGrabbing_DisableWhenRunning.Value && IsArmSwinging(hand) && __instance is not FVRHandGrabPoint) return;
+			//ensure other hand is not the same item
+			if (__instance == hand.OtherHand.CurrentInteractable) return;
+			//ensure bolt action rifle's bolt is not blocked
+			if (__instance is BoltActionRifle_Handle && ((__instance as BoltActionRifle_Handle)!).Rifle.CanBoltMove() == false) return;
+			if (hand.Input.IsGrabbing && hand.m_state == FVRViveHand.HandState.Empty)
+			{
+				if (__instance is SosigWeaponPlayerInterface)
+					if ((__instance as SosigWeaponPlayerInterface)!.W.Type != SosigWeapon.SosigWeaponType.Grenade) return;
+					
+				if (BepInExPlugin.QuickGrabbing_RegrabBolt.Value && __instance is BoltActionRifle_Handle) { //doesnt feel good
+					var bolt = __instance as BoltActionRifle_Handle;
+					bolt.m_wasTPInitiated = true;
+				}
+					
+				hand.Buzz(hand.Buzzer.Buzz_BeginInteraction);
+				hand.ForceSetInteractable(__instance);
+				__instance.BeginInteraction(hand);
+			}
+		}
+
+		[HarmonyPatch(typeof(PinnedGrenade), "ReleaseLever")]
+		[HarmonyPatch(typeof(FVRCappedGrenade), "CapRemoved")]
+		[HarmonyPatch(typeof(SosigWeapon), "FuseGrenade")]
+		[HarmonyPostfix]
+		public static void GrenadeExtendRadius(FVRPhysicalObject __instance) {
+			SphereCollider trigger = __instance.gameObject.AddComponent<SphereCollider>();
+			trigger.isTrigger = true;
+			trigger.radius = BepInExPlugin.QuickGrabbing_GrabGrenadeRange.Value;
+		}
+		
+
 		public static bool IsArmSwinging(FVRViveHand hand)
 		{
 			if (hand.MovementManager.Mode == FVRMovementManager.MovementMode.Armswinger)
@@ -82,5 +127,7 @@ namespace PotatoesSoup
 			}
 			return false;
 		}
+		
+		
 	}
 }
