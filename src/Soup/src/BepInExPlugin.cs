@@ -21,6 +21,9 @@ namespace PotatoesSoup
 		public static ConfigEntry<bool> AntonBoltLock_IsEnabled;
 		public static ConfigEntry<bool> VerboseLogging_IsEnabled;
 		public static ConfigEntry<bool> Akimbo_IsEnabled;
+		public static ConfigEntry<bool> DualStageAlt_IsEnabled;
+		public static ConfigEntry<bool> BulletBounce_IsEnabled;
+		public static ConfigEntry<float> BulletBounce_Bounciness;
 		private void SetConfig_Other()
 		{
 			//EnableAccurateQBslots = Config.Bind("General Settings", "Accurate QB Slots", true, "Removes QB slot delay. Can / does cause slowdown.");
@@ -29,6 +32,10 @@ namespace PotatoesSoup
 			AntonBoltLock_IsEnabled = Config.Bind(SETTING_OTHER_NAME, "Enable Antons Bolt Lock", false, "Enables Anton's bolt lock that applies to guns like the SKS and M1 Garand.");
 			VerboseLogging_IsEnabled = Config.Bind(SETTING_OTHER_NAME, "Enable Verbose Logging", false, "Add more spam to your console for debugging.");
 			Akimbo_IsEnabled = base.Config.Bind<bool>(SETTING_OTHER_NAME, "Enable Akimbo", true, "Enables Akimbo-style reloading.");
+			DualStageAlt_IsEnabled = base.Config.Bind<bool>(SETTING_OTHER_NAME, "Enable Less-Sensitive Dual Stage Trigger", true, "Makes dual stage triggers (e.g AUG) to have a less sensitive auto trigger which requires full depression of the trigger, allowing easier single-shots.");
+			BulletBounce_IsEnabled = base.Config.Bind<bool>(SETTING_OTHER_NAME, "Enable Bullet Bounce", true, "Empty bullets now bounce.");
+			BulletBounce_Bounciness = base.Config.Bind<float>(SETTING_OTHER_NAME, "Bullet Bounciness", 0.5f, "From 0-1 (requires restart.)");
+
 		}
 
 		//quick grabbing
@@ -42,7 +49,9 @@ namespace PotatoesSoup
 		public static ConfigEntry<bool> QuickGrabbing_GrabBolts;
 		public static ConfigEntry<bool> QuickGrabbing_GrabMags;
 		public static ConfigEntry<bool> QuickGrabbing_GrabGrenade;
+		public static ConfigEntry<float> QuickGrabbing_GrabGrenadeRange;
 		public static ConfigEntry<bool> QuickGrabbing_GrabSosigWeapon;
+		public static ConfigEntry<bool> QuickGrabbing_GrabBullets;
 		private void SetConfig_QuickGrabbing()
 		{
 			QuickGrabbing_IsEnabled = Config.Bind(SETTING_QG_NAME, "Is Enabled", true, "Enables Quick Grabbing");
@@ -54,7 +63,10 @@ namespace PotatoesSoup
 			QuickGrabbing_GrabBolts = Config.Bind(SETTING_QG_NAME, "Enable Grabbing Weapon Bolts", true, "Allows Quick Grabbing to apply to weapon bolts/handles");
 			QuickGrabbing_GrabMags = Config.Bind(SETTING_QG_NAME, "Enable Grabbing Magazines and Speedloaders", true, "Allows Quick Grabbing to apply to weapon mags/speedloaders");
 			QuickGrabbing_GrabGrenade = Config.Bind(SETTING_QG_NAME, "Enable Grabbing Grenades", true, "Allows Quick Grabbing to apply to grenades");
+			QuickGrabbing_GrabGrenadeRange = Config.Bind(SETTING_QG_NAME, "Expanded Grenade Grab Range", 0.3f, "Expands range to grab grenades, making it easier to grab grenades mid-air (Radius in metres)");
 			QuickGrabbing_GrabSosigWeapon = Config.Bind(SETTING_QG_NAME, "Enable Grabbing Sosig guns", true, "Allows Quick Grabbing to apply to sosig guns");
+			QuickGrabbing_GrabBullets = Config.Bind(SETTING_QG_NAME, "Enable Grabbing Bullets", true, "Allows Quick Grabbing to apply to bullets");
+
 		}
 		public const  string            SETTING_QUESTIONABLE_NAME = "Questionable Settings";
 		public static ConfigEntry<bool> AkimboOneHand_IsEnabled;
