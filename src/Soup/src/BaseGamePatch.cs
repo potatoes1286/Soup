@@ -115,5 +115,49 @@ namespace PotatoesSoup
 					if (!component.isTrigger)
 						component.material = BepInExPlugin.Bounce;
 		}
+
+		[HarmonyPatch(typeof(FVRFireArmChamber), "EjectRound", new Type[] {typeof(Vector3), typeof(Vector3), typeof(Vector3), typeof(bool)})]
+		[HarmonyPatch(typeof(FVRFireArmChamber), "EjectRound", new Type[] {typeof(Vector3), typeof(Vector3), typeof(Vector3),typeof(Vector3),typeof(Quaternion), typeof(bool)})]
+		[HarmonyPrefix]
+		public static bool BoltActionRifle_AdaptiveEjectSpeed(FVRFireArmChamber __instance, ref Vector3 EjectionVelocity, ref Vector3 EjectionAngularVelocity) {
+			if (!BepInExPlugin.AdaptiveEjectSpeed_IsEnabled.Value)
+				return true;
+			float modifier = 1;
+
+			if (__instance.Firearm is BoltActionRifle) {
+				var wep = (__instance.Firearm as BoltActionRifle);
+				if (wep.BoltHandle.m_hand != null) {
+					float speed = wep.BoltHandle.m_hand.Input.VelLinearWorld.magnitude;
+					modifier = speed / 2;
+				}
+			} else if (__instance.Firearm is ClosedBoltWeapon) {
+				var wep = (__instance.Firearm as ClosedBoltWeapon)!;
+				if (!wep.HasHandle && wep.Bolt.m_hand != null) {
+					float speed = wep.Bolt.m_hand.Input.VelLinearWorld.magnitude;
+					modifier = speed / 3;
+				} else if (wep.HasHandle && wep.Handle.m_hand != null) {
+					float speed = wep.Handle.m_hand.Input.VelLinearWorld.magnitude;
+					modifier = speed / 3;
+				}
+			} else if (__instance.Firearm is Handgun) {
+				var wep = (__instance.Firearm as Handgun)!;
+				if (wep.Slide.m_hand != null) {
+					float speed = wep.Slide.m_hand.Input.VelLinearWorld.magnitude;
+					modifier = speed / 2;
+				}
+			}else if (__instance.Firearm is OpenBoltReceiver) {
+				var wep = (__instance.Firearm as OpenBoltReceiver)!;
+				if (wep.Bolt.m_hand != null) {
+					float speed = wep.Bolt.m_hand.Input.VelLinearWorld.magnitude;
+					modifier = speed / 3;
+				}
+			}
+
+			modifier = Math.Max(Math.Min(Math.Abs(modifier), 1f), 0.2f);
+			EjectionVelocity *= modifier;
+			EjectionAngularVelocity *= modifier;
+			
+			return true;
+		}
 	}
 }

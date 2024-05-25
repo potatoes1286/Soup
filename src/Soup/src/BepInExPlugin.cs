@@ -14,16 +14,17 @@ namespace PotatoesSoup
 		//general
 		
 		//other
-		public const  string            SETTING_OTHER_NAME = "Other";
-		public static ConfigEntry<bool> EasyAttaching_IsEnabled;
-		public static ConfigEntry<bool> AccurateQBSlots_IsEnabled;
-		public static ConfigEntry<bool> BetterStabilization_IsEnabled;
-		public static ConfigEntry<bool> AntonBoltLock_IsEnabled;
-		public static ConfigEntry<bool> VerboseLogging_IsEnabled;
-		public static ConfigEntry<bool> Akimbo_IsEnabled;
-		public static ConfigEntry<bool> DualStageAlt_IsEnabled;
-		public static ConfigEntry<bool> BulletBounce_IsEnabled;
+		public const  string             SETTING_OTHER_NAME = "Other";
+		public static ConfigEntry<bool>  EasyAttaching_IsEnabled;
+		public static ConfigEntry<bool>  AccurateQBSlots_IsEnabled;
+		public static ConfigEntry<bool>  BetterStabilization_IsEnabled;
+		public static ConfigEntry<bool>  AntonBoltLock_IsEnabled;
+		public static ConfigEntry<bool>  VerboseLogging_IsEnabled;
+		public static ConfigEntry<bool>  Akimbo_IsEnabled;
+		public static ConfigEntry<bool>  DualStageAlt_IsEnabled;
+		public static ConfigEntry<bool>  BulletBounce_IsEnabled;
 		public static ConfigEntry<float> BulletBounce_Bounciness;
+		public static ConfigEntry<bool>  AdaptiveEjectSpeed_IsEnabled;
 		private void SetConfig_Other()
 		{
 			//EnableAccurateQBslots = Config.Bind("General Settings", "Accurate QB Slots", true, "Removes QB slot delay. Can / does cause slowdown.");
@@ -35,6 +36,7 @@ namespace PotatoesSoup
 			DualStageAlt_IsEnabled = base.Config.Bind<bool>(SETTING_OTHER_NAME, "Enable Less-Sensitive Dual Stage Trigger", true, "Makes dual stage triggers (e.g AUG) to have a less sensitive auto trigger which requires full depression of the trigger, allowing easier single-shots.");
 			BulletBounce_IsEnabled = base.Config.Bind<bool>(SETTING_OTHER_NAME, "Enable Bullet Bounce", true, "Empty bullets now bounce.");
 			BulletBounce_Bounciness = base.Config.Bind<float>(SETTING_OTHER_NAME, "Bullet Bounciness", 0.5f, "From 0-1 (requires restart.)");
+			AdaptiveEjectSpeed_IsEnabled = base.Config.Bind<bool>(SETTING_OTHER_NAME, "Adaptive Eject Speed", true, "Bullets eject faster when you rack the bolt faster.");
 
 		}
 
