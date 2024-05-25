@@ -48,6 +48,17 @@ Full list of additions/changes
 - If you are holding two pistols in your hands, you can simply hover them over magazines in your quickbelt to automatically load them!
 - Can be enabled/disabled in config
 - This reloading style can be enabled when only holding one handgun in the config (off by default)
+##### Bullet Bouncing
+- Empty bullets bounce!
+- Disableable in config. Bounciness can be modified in config.
+##### Alternative Dual-Stage Trigger
+- Guns with dual-stage triggers (ex. AUG) now have far less sensitive auto, making single-fire easier.
+- Disableable in config.
+##### Sensitive Break-Action Weapons
+- Break action weapon latches are now twice as sensitive, making opening them far easier.
+##### Grenade Hot-Potato
+- Grenades (Pinned, capped, sosignades) are now far easier to catch mid-air for re-throwing pleasure.
+- Catch range can be modified in config
 
 ## Building
 
