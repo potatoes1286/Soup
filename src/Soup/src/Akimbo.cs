@@ -15,7 +15,7 @@ namespace PotatoesSoup {
 		[HarmonyPatch(typeof(Handgun), "UpdateInteraction")]
 		[HarmonyPrefix]
 		public static bool Handgun_UpdateInteraction_AkimboReloading(Handgun __instance, ref FVRViveHand hand) {
-			if (!BepInExPlugin.Akimbo_IsEnabled.Value || __instance.Magazine != null)
+			if (!BepInExPlugin.Akimbo_IsEnabled.Value || __instance.Magazine != null || __instance.MagazineMountPos == null)
 				return true;
 			FVRQuickBeltSlot qbslot = null;
 			Transform t;
@@ -74,7 +74,7 @@ namespace PotatoesSoup {
 		[HarmonyPrefix]
 		public static bool ClosedBoltWeapon_UpdateInteraction_AkimboReloading(ClosedBoltWeapon __instance, ref FVRViveHand hand) {
 			if (!BepInExPlugin.AkimboAllWeapons_IsEnabled.Value) return true; //wheee
-			if (!BepInExPlugin.Akimbo_IsEnabled.Value || __instance.Magazine != null)
+			if (!BepInExPlugin.Akimbo_IsEnabled.Value || __instance.Magazine != null || __instance.MagazineMountPos == null)
 				return true;
 			FVRQuickBeltSlot qbslot = null;
 			Transform t = __instance.MagazineMountPos.transform;
@@ -126,7 +126,7 @@ namespace PotatoesSoup {
 		[HarmonyPrefix]
 		public static bool OpenBoltReceiver_UpdateInteraction_AkimboReloading(OpenBoltReceiver __instance, ref FVRViveHand hand) {
 			if (!BepInExPlugin.AkimboAllWeapons_IsEnabled.Value) return true; //wheee
-			if (!BepInExPlugin.Akimbo_IsEnabled.Value || __instance.Magazine != null)
+			if (!BepInExPlugin.Akimbo_IsEnabled.Value || __instance.Magazine != null || __instance.MagazineMountPos == null)
 				return true;
 			FVRQuickBeltSlot qbslot = null;
 			Transform t = __instance.MagazineMountPos.transform;
