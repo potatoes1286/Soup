@@ -64,7 +64,7 @@ namespace PotatoesSoup
 			//if clip inserted and mag is not full, do not quickgrab bolt
 			if (__instance is BoltActionRifle_Handle) {
 				var handle = __instance as BoltActionRifle_Handle;
-				if (handle.Rifle.Clip != null && handle.Rifle.Magazine.m_capacity != handle.Rifle.Magazine.m_numRounds)
+				if (handle.Rifle.Clip != null && (handle.Rifle.Magazine.m_capacity != handle.Rifle.Magazine.m_numRounds) || handle.Rifle.Clip.m_numRounds == 0)
 					return;
 			} 
 
@@ -103,7 +103,7 @@ namespace PotatoesSoup
 				return true;
 			if (__instance.Clip.FireArm != null &&
 			    __instance.Clip.FireArm.Magazine != null &&
-			    __instance.Clip.FireArm.Magazine.IsFull()) {
+			    (__instance.Clip.FireArm.Magazine.IsFull() || __instance.Clip.m_numRounds == 0)) {
 				__instance.m_hand.ForceSetInteractable(null);
 				return false;
 			}
