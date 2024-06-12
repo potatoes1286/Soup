@@ -25,6 +25,7 @@ namespace PotatoesSoup
 		public static ConfigEntry<bool>  BulletBounce_IsEnabled;
 		public static ConfigEntry<float> BulletBounce_Bounciness;
 		public static ConfigEntry<bool>  AdaptiveEjectSpeed_IsEnabled;
+		public static ConfigEntry<bool>  CorrectLoading_IsEnabled;
 		private void SetConfig_Other()
 		{
 			//EnableAccurateQBslots = Config.Bind("General Settings", "Accurate QB Slots", true, "Removes QB slot delay. Can / does cause slowdown.");
@@ -37,23 +38,24 @@ namespace PotatoesSoup
 			BulletBounce_IsEnabled = base.Config.Bind<bool>(SETTING_OTHER_NAME, "Enable Bullet Bounce", true, "Empty bullets now bounce.");
 			BulletBounce_Bounciness = base.Config.Bind<float>(SETTING_OTHER_NAME, "Bullet Bounciness", 0.5f, "From 0-1 (requires restart.)");
 			AdaptiveEjectSpeed_IsEnabled = base.Config.Bind<bool>(SETTING_OTHER_NAME, "Adaptive Eject Speed", true, "Bullets eject faster when you rack the bolt faster.");
-
+			CorrectLoading_IsEnabled = base.Config.Bind<bool>(SETTING_OTHER_NAME, "Correct Bolt Action Loading", true, "Disables +1 loading of bolt action rifles, because YOU CAN'T DO THAT IRL.");
 		}
 
 		//quick grabbing
-		public const  string            SETTING_QG_NAME = "Quick Grabbing";
-		public static ConfigEntry<bool> QuickGrabbing_IsEnabled;
-		public static ConfigEntry<bool> QuickGrabbing_DisableWhenRunning;
-		public static ConfigEntry<bool> QuickGrabbing_RegrabBolt;
-		public static ConfigEntry<bool> QuickGrabbing_GrabFores;
-		public static ConfigEntry<bool> QuickGrabbing_GrabPistolSlides;
-		public static ConfigEntry<bool> QuickGrabbing_GrabRopes;
-		public static ConfigEntry<bool> QuickGrabbing_GrabBolts;
-		public static ConfigEntry<bool> QuickGrabbing_GrabMags;
-		public static ConfigEntry<bool> QuickGrabbing_GrabGrenade;
+		public const  string             SETTING_QG_NAME = "Quick Grabbing";
+		public static ConfigEntry<bool>  QuickGrabbing_IsEnabled;
+		public static ConfigEntry<bool>  QuickGrabbing_DisableWhenRunning;
+		public static ConfigEntry<bool>  QuickGrabbing_RegrabBolt;
+		public static ConfigEntry<bool>  QuickGrabbing_GrabFores;
+		public static ConfigEntry<bool>  QuickGrabbing_GrabPistolSlides;
+		public static ConfigEntry<bool>  QuickGrabbing_GrabRopes;
+		public static ConfigEntry<bool>  QuickGrabbing_GrabBolts;
+		public static ConfigEntry<bool>  QuickGrabbing_GrabMags;
+		public static ConfigEntry<bool>  QuickGrabbing_GrabGrenade;
 		public static ConfigEntry<float> QuickGrabbing_GrabGrenadeRange;
-		public static ConfigEntry<bool> QuickGrabbing_GrabSosigWeapon;
-		public static ConfigEntry<bool> QuickGrabbing_GrabBullets;
+		public static ConfigEntry<bool>  QuickGrabbing_GrabSosigWeapon;
+		public static ConfigEntry<bool>  QuickGrabbing_GrabBullets;
+		public static ConfigEntry<bool>  QuickGrabbing_FastClip;
 		private void SetConfig_QuickGrabbing()
 		{
 			QuickGrabbing_IsEnabled = Config.Bind(SETTING_QG_NAME, "Is Enabled", true, "Enables Quick Grabbing");
@@ -68,6 +70,7 @@ namespace PotatoesSoup
 			QuickGrabbing_GrabGrenadeRange = Config.Bind(SETTING_QG_NAME, "Expanded Grenade Grab Range", 0.3f, "Expands range to grab grenades, making it easier to grab grenades mid-air (Radius in metres)");
 			QuickGrabbing_GrabSosigWeapon = Config.Bind(SETTING_QG_NAME, "Enable Grabbing Sosig guns", true, "Allows Quick Grabbing to apply to sosig guns");
 			QuickGrabbing_GrabBullets = Config.Bind(SETTING_QG_NAME, "Enable Grabbing Bullets", true, "Allows Quick Grabbing to apply to bullets");
+			QuickGrabbing_FastClip = Config.Bind(SETTING_QG_NAME, "Enable Fast Clip", true, "If true, will automatically let go of clips when magazine full.");
 
 		}
 		public const  string            SETTING_QUESTIONABLE_NAME = "Questionable Settings";

@@ -159,5 +159,14 @@ namespace PotatoesSoup
 			
 			return true;
 		}
+		
+		[HarmonyPatch(typeof(BoltActionRifle), "Awake")]
+		[HarmonyPostfix]
+		public static void BoltActionRifle_Awake_CorrectLoading(BoltActionRifle __instance) {
+			if (!BepInExPlugin.CorrectLoading_IsEnabled.Value)
+				return;
+			if (__instance.Magazine != null)
+				__instance.Chamber.IsManuallyChamberable = false;
+		}
 	}
 }
