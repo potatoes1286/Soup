@@ -59,6 +59,9 @@ Full list of additions/changes
 ##### Grenade Hot-Potato
 - Grenades (Pinned, capped, sosignades) are now far easier to catch mid-air for re-throwing pleasure.
 - Catch range can be modified in config
+##### Adaptive Eject Speed
+- Bullets not eject from guns faster or slower depending on how fast you rack the slide/bolt.
+- Can be disabled in config.
 
 ## Building
 
