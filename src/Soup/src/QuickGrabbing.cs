@@ -1,4 +1,5 @@
-﻿using FistVR;
+﻿using System;
+using FistVR;
 using HarmonyLib;
 using UnityEngine;
 
@@ -59,12 +60,13 @@ namespace PotatoesSoup
 			if (__instance == hand.OtherHand.CurrentInteractable) return;
 			
 			//ensure bolt action rifle's bolt is not blocked
-			if (__instance is BoltActionRifle_Handle && ((__instance as BoltActionRifle_Handle)!).Rifle.CanBoltMove() == false) return;
-			
+			if (__instance is BoltActionRifle_Handle && (__instance as BoltActionRifle_Handle)!.Rifle.CanBoltMove() == false) return;
 			//if clip inserted and mag is not full, do not quickgrab bolt
 			if (__instance is BoltActionRifle_Handle) {
 				var handle = __instance as BoltActionRifle_Handle;
-				if (handle.Rifle.Clip != null && (handle.Rifle.Magazine.m_capacity != handle.Rifle.Magazine.m_numRounds) || handle.Rifle.Clip.m_numRounds == 0)
+				// Cancels grab bolt if there is a not-full mag with a not-empty clip in gun
+				if(handle.Rifle.Magazine != null && handle.Rifle.Magazine.m_capacity != handle.Rifle.Magazine.m_numRounds
+				&& handle.Rifle.Clip != null && handle.Rifle.Clip.m_numRounds != 0)
 					return;
 			} 
 
