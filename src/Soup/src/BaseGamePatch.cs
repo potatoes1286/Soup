@@ -151,6 +151,15 @@ namespace PotatoesSoup
 					float speed = wep.Bolt.m_hand.Input.VelLinearWorld.magnitude;
 					modifier = speed / 3;
 				}
+			} else if (__instance.Firearm is TubeFedShotgun) {
+				var wep = (__instance.Firearm as TubeFedShotgun)!;
+				if (wep.Bolt.m_hand != null) {
+					float speed = wep.Bolt.m_hand.Input.VelLinearWorld.magnitude;
+					modifier = speed / 3;
+				} else if(wep.HasHandle && wep.Handle.m_hand != null) {
+					float speed = wep.Handle.m_hand.Input.VelLinearWorld.magnitude;
+						modifier = speed / 3;
+				}
 			}
 
 			modifier = Math.Max(Math.Min(Math.Abs(modifier), 1f), 0.2f);
