@@ -9,6 +9,25 @@ namespace PotatoesSoup
 {
 	public class DecockingRevolver : MonoBehaviour
 	{
+		
+		[HarmonyPatch(typeof(SingleActionRevolver), "Fire")]
+		[HarmonyPrefix]
+		public static bool DecockSingleActionRevolver(SingleActionRevolver __instance) {
+			if (__instance.m_hand != null) {
+				bool activate = false;
+				if (__instance.m_hand.IsInStreamlinedMode == false)
+					activate = __instance.m_hand.Input.TouchpadPressed;
+				else
+					activate = __instance.m_hand.Input.AXButtonPressed;
+				if (activate) {
+					return false;
+				}
+			}
+
+			return true;
+		}
+		
+		
 		[HarmonyPatch(typeof(Revolver), "Fire")]
 		[HarmonyPrefix]
 		public static bool DecockRevolver(Revolver __instance)
